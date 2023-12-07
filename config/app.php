@@ -154,7 +154,10 @@ return [
     | this array to grant expanded functionality to your applications.
     |
     */
-
+    'providers' => [
+        // ...
+        App\Providers\DynamicConfigServiceProvider::class,
+    ],
     'providers' => ServiceProvider::defaultProviders()->merge([
         /*
          * Package Service Providers...
