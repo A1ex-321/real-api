@@ -7,6 +7,8 @@ use App\Http\Controllers\API\ProductDetailsController;
 use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\Api\CategoryController;
 use App\Http\Controllers\Api\MailController;
+use App\Http\Controllers\Api\FranchiseController;
+
 
 
 
@@ -34,6 +36,8 @@ Route::apiResources(['products' => ProductDetailsController::class]);
 Route::get('/records', [CategoryController::class, 'index']);
 Route::get('/category/{id}', [CategoryController::class, 'categorys']);
 Route::post('/mail', [MailController::class, 'sendUserContact']);
+Route::post('/franchise', [FranchiseController::class, 'sendfranchiseContact']);
+
 
 
 

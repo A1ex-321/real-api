@@ -120,6 +120,16 @@
           </a>
         </li>
         <li class="nav-item">
+          <a href="{{route('franchiselist')}}"
+            class="nav-link {{ request()->segment(2) === 'franchiselist' ? 'active' : '' }}">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+
+            <p>
+            Franchise
+            </p>
+          </a>
+        </li> 
+        <li class="nav-item">
           <a href="{{route('brand-list')}}"
             class="nav-link {{ request()->segment(2) === 'brand' ? 'active' : '' }}">
             <i class="fa fa-tasks" aria-hidden="true"></i>

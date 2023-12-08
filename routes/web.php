@@ -19,6 +19,8 @@ use App\Http\Controllers\Web\ProductDetailsController;
 use App\Http\Controllers\web\CartController;
 use App\Http\Controllers\web\CheckoutController;
 use App\Http\Controllers\web\OrderDetailsController;
+use App\Http\Controllers\Admin\FranchiseController;
+
 // use App\Http\Controllers\Admin\Website;
 // use App\Http\Controllers\web\Website;
 
@@ -63,6 +65,10 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/brand/delete/{id}', [MailController::class, 'brand_delete'])->name('delete-brand');
     Route::get('admin/maillist', [MailController::class, 'maillist']);
     Route::get('admin/brand/deletemail/{id}', [MailController::class, 'deletemail']);
+    Route::get('admin/franchiselist', [FranchiseController::class, 'list'])->name('franchiselist');
+    Route::get('admin/franchise/delete/{id}', [FranchiseController::class, 'delete']);
+
+
 
     // Route::get('admin/brand/mail/{arg1}/{arg2}', [BrandController::class, 'mail']);
 

@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Log;
 
-class SendMail extends Mailable
+class Sendfranchise extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -18,16 +18,18 @@ class SendMail extends Mailable
      * Create a new message instance.
      */
     public $name;
-    // public $email;
-    public $msg;
+    public $city;
+    public $state;
     public $phone;
 
-    public function __construct($name, $msg, $phone)
+    public function __construct($name, $state, $phone, $city)
     {
 
         $this->name = $name;
-        $this->msg = $msg;
+        $this->state = $state;
         $this->phone = $phone;
+        $this->city = $city;
+
 
         //   Log::info('Razorpay API Request: ' . json_encode($name,$email,$msg));
     }
@@ -48,7 +50,7 @@ class SendMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'Mail1.hh',
+            view: 'Mail1.franchise',
         );
     }
 
@@ -63,16 +65,17 @@ class SendMail extends Mailable
     }
     public function build()
     {
-        if ($this->msg == null) {
-            $this->msg = 'No Message';
-        }
+        // if ($this->msg == null) {
+        //     $this->msg = 'No Message';
+        // }
         // return $this->view('Mail1.Mail1');
-        return $this->view('Mail1.hh')
+        return $this->view('Mail1.franchise')
             ->subject('New Contact Form Submission')
             ->with([
                 'name' => $this->name,
-                'msg' => $this->msg,
-                'phone' => $this->phone
+                'city' => $this->city,
+                'phone' => $this->phone,
+                'state' => $this->state
 
             ]);
     }
