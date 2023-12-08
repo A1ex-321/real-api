@@ -33,7 +33,7 @@ class MailController extends Controller
             //     'message' => 'required',
             // ]);
 
-            Mail::to('alexalphons82@gmail.com')->send(new SendMail($name, $msg, $phone));
+            Mail::to('aishwacleantech@gmail.com')->send(new SendMail($name, $msg, $phone));
 
             $mail = new Mailstores;
             $mail->name = $name;

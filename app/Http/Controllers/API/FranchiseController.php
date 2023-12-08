@@ -33,7 +33,7 @@ class FranchiseController extends Controller
             //     'message' => 'required',
             // ]);
 
-            Mail::to('alexalphons82@gmail.com')->send(new Sendfranchise($name, $state, $phone,$city,));
+            Mail::to('aishwacleantech@gmail.com')->send(new Sendfranchise($name, $state, $phone,$city,));
 
             $mail = new franchise;
             $mail->name = $name;
