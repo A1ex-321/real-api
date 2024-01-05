@@ -45,7 +45,6 @@ return array(
     'App\\Models\\Gallery' => $baseDir . '/app/Models/Gallery.php',
     'App\\Models\\OrderModel' => $baseDir . '/app/Models/OrderModel.php',
     'App\\Models\\ProductModel' => $baseDir . '/app/Models/ProductModel.php',
-    'App\\Models\\Smtp' => $baseDir . '/app/Models/Smtp.php',
     'App\\Models\\User' => $baseDir . '/app/Models/User.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',
