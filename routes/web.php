@@ -92,6 +92,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::post('admin/blog/edit/{id}', [BlogController::class, 'blog_update'])->name('update-brand');
     Route::get('add-blogcontent/{id}', [BlogController::class, 'content_add'])->name('add-blogcontent');
     Route::post('admin/addcontentblog/add', [BlogController::class, 'create_content_blog'])->name('create-content-blog');
+    Route::get('view-blogcontent/{id}', [BlogController::class, 'content_view'])->name('view-blogcontent');
+    Route::get('admin/blog/delete/{id}', [BlogController::class, 'delete_blog'])->name('delete-blog');
     // routes/web.php or routes/api.php
 Route::post('/upload-image', [BlogController::class, 'uploadImage'])->name('upload.image.route');
 Route::get('/content_add1', function () {

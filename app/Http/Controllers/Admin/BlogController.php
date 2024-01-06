@@ -22,13 +22,24 @@ class BlogController extends Controller
     public function blog_add(Request $request)
     {
         $data['header_title'] = "Add New Brand";
-        return view('admin.blog.contentblog', $data);
+        return view('admin.blog.add-new', $data);
     }
     public function content_add(Request $request, $id)
     {
         $data['blog'] = Blog::find($id);
         // $data['header_title'] = "Add New Brand";
         return view('admin.blog.contentblog', $data);
+    }
+    public function content_view(Request $request, $id)
+    {
+        // $data['blog'] = Blog::find($id);
+        // $data['header_title'] = "Add New Brand";
+        // Get user's orders
+        $content = Contentblog::where('blog_id', $id)->first();
+        //  $content = $user->content;
+        // dd($content);
+            return view('admin.blog.viewcontent', compact('content'));
+      
     }
     public function content_add1(Request $request)
     {
@@ -118,5 +129,11 @@ class BlogController extends Controller
         $brand = Blog::find($id);
         $brand->delete();
         return redirect()->back()->with('success', 'Brand Successfully Deleted');
+    }
+    public function delete_blog($id, Request $request)
+    {
+        $brand = Contentblog::find($id);
+        $brand->delete();
+        return redirect('admin/blog/list')->with('success', '');
     }
 }

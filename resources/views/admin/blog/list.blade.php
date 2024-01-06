@@ -56,8 +56,7 @@
                                         <th>Description</th>
                                         <th>Image</th>
                                         <th>Action</th>
-
-
+                                        <th>View</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -77,7 +76,15 @@
                                             </button>
 
                                         </td>
+                                        <td>
+                                            <button style="background-color: #3498db; color: #fff;">
+                                                <a href="{{route('view-blogcontent', ['id' => $value->id])}}" class="btn">
+                                                    <i class=""></i>
+                                                    <span>View Blog content</span>
+                                                </a>
+                                            </button>
 
+                                        </td>
                                         <td>
                                             <!-- <a href="{{url('admin/brand/edit/'.$value->id)}}" class="btn  "><i
                                                     class="fas fa-edit"></i>
