@@ -14,7 +14,7 @@ class Contentblog extends Model
         'blog_id', 'content_blog'
     ];
     public function blog()
-    {
-        return $this->belongsTo(User::class);
-    }
+{
+    return $this->belongsTo(Blog::class, 'blog_id');
+}
 }

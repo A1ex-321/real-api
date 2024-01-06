@@ -11,10 +11,10 @@ class Blog extends Model
     protected $table = 'blog';
 
     protected $fillable = [
-        'Tittle', 'Description', 'Image'
+        'id','Tittle', 'Description', 'Image'
     ];
-    public function content()
+    public function contentblogs()
     {
-        return $this->hasMany(Blog::class);
+        return $this->hasMany(Contentblog::class, 'blog_id');
     }
 }
