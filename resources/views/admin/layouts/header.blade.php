@@ -139,7 +139,16 @@
             </p>
           </a>
         </li> 
+        <li class="nav-item">
+          <a href="{{route('blog-list')}}"
+            class="nav-link {{ request()->segment(2) === 'blog' ? 'active' : '' }}">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
 
+            <p>
+            Blog
+            </p>
+          </a>
+        </li> 
         <!-- <li class="nav-item">
           <a href="{{route('products.index')}}"
             class="nav-link {{ request()->segment(2) === 'products' ? 'active' : '' }}">

@@ -26,7 +26,7 @@ class BlogController extends Controller
     public function content_add(Request $request)
     {
         $data['header_title'] = "Add New Brand";
-        return view('admin.blog.blogcontent', $data);
+        return view('admin.blog.contentblog', $data);
     }
     public function content_add1(Request $request)
     {
