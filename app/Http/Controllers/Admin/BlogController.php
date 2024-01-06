@@ -21,11 +21,12 @@ class BlogController extends Controller
     public function blog_add(Request $request)
     {
         $data['header_title'] = "Add New Brand";
-        return view('admin.blog.add-new', $data);
+        return view('admin.blog.contentblog', $data);
     }
-    public function content_add(Request $request)
+    public function content_add(Request $request,$id)
     {
-        $data['header_title'] = "Add New Brand";
+        $data['blog'] = Blog::find($id);
+        // $data['header_title'] = "Add New Brand";
         return view('admin.blog.contentblog', $data);
     }
     public function content_add1(Request $request)

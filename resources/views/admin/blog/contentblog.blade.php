@@ -12,7 +12,8 @@
                     <!-- Your existing form -->
                     <form action="{{ route('ckeditor.upload') }}" method="post">
                         @csrf
-                        <textarea name="blog_content" id="editor" required></textarea>
+                        <input type="hidden" name="blog_id" value="blog->id">
+                        <textarea name="blog_content" id="editor" style="height: 250px;"required></textarea>
                         <button type="submit" class="btn btn-success">Submit</button>
                     </form>
                 </div>

@@ -70,7 +70,7 @@
                                         <td><img src="{{ asset('public/images/' . $value->Image) }}" alt="Image" width="80" height="80"></td>
                                         <td>
                                             <button style="background-color: #3498db; color: #fff;">
-                                                <a href="{{route('add-blogcontent')}}" class="btn">
+                                                <a href="{{route('add-blogcontent', ['id' => $value->id])}}" class="btn">
                                                     <i class="fas fa-plus"></i>
                                                     <span>Add Blog content</span>
                                                 </a>

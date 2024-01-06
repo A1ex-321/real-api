@@ -90,7 +90,8 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('admin/brand/delete/{id}', [BlogController::class, 'delete'])->name('delete-brand');
     Route::get('admin/blog/edit/{id}', [BlogController::class, 'blog_edit']);
     Route::post('admin/blog/edit/{id}', [BlogController::class, 'blog_update'])->name('update-brand');
-    Route::get('admin/addblogcontent/add', [BlogController::class, 'content_add'])->name('add-blogcontent');
+    Route::get('add-blogcontent/{id}', [BlogController::class, 'content_add'])->name('add-blogcontent');
+
     // routes/web.php or routes/api.php
 Route::post('/upload-image', [BlogController::class, 'uploadImage'])->name('upload.image.route');
 Route::get('/content_add1', function () {
