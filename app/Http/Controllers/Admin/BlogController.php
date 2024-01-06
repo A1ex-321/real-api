@@ -14,6 +14,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Blog;
 use Illuminate\Support\Facades\Log;
+use App\Models\Contentblog;
 
 class BlogController extends Controller
 {
@@ -23,7 +24,7 @@ class BlogController extends Controller
         $data['header_title'] = "Add New Brand";
         return view('admin.blog.contentblog', $data);
     }
-    public function content_add(Request $request,$id)
+    public function content_add(Request $request, $id)
     {
         $data['blog'] = Blog::find($id);
         // $data['header_title'] = "Add New Brand";
@@ -38,13 +39,13 @@ class BlogController extends Controller
     {
         // Log the request data
         Log::info('Request Data:', $request->all());
-    
+
         $image = $request->file('upload');
         $imageName = time() . '_' . str_replace(' ', '_', $image->getClientOriginalName());
-    
+
         // Log the file move result
         $isMoved = $image->move(public_path('images'), $imageName);
-    
+
         // Check if the file move was successful and log accordingly
         if ($isMoved) {
             Log::info('File Move Success:', ['imageName' => $imageName]);
@@ -52,11 +53,19 @@ class BlogController extends Controller
             Log::error('File Move Failed:', ['imageName' => $imageName]);
         }
         Log::error('File :', ['url' => asset('public/images/' . $imageName)]);
-        return response()->json(['url' => asset('public/images/' . $imageName),'uploaded'=>1]);
+        return response()->json(['url' => asset('public/images/' . $imageName), 'uploaded' => 1]);
     }
-    
 
 
+    public function create_content_blog(Request $request)
+    {
+        // dd($request->all());
+        $blog = new Contentblog;
+        $blog->blog_id = $request->blog_id;
+        $blog->content_blog = $request->content_blog;
+        $blog->save();
+        return redirect('admin/blog/list')->with('success', 'Blog uploaded successfully.');
+    }
     public function create_blog(Request $request)
     {
 

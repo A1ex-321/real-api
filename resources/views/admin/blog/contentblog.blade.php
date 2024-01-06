@@ -1,6 +1,12 @@
 @extends('admin.layouts.app')
 
 @section('content')
+<style type="text/css">
+    .ck-editor__editable_inline
+    {
+        height:350Px;
+    }
+</style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <!-- ... (Your existing content header) ... -->
@@ -10,10 +16,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <!-- Your existing form -->
-                    <form action="{{ route('ckeditor.upload') }}" method="post">
+                    <form action="{{ route('create-content-blog') }}" method="post">
                         @csrf
-                        <input type="hidden" name="blog_id" value="blog->id">
-                        <textarea name="blog_content" id="editor" style="height: 250px;"required></textarea>
+                        <input type="hidden" name="blog_id" value="{{ $blog->id }}">
+
+                        <textarea name="content_blog" id="editor" style="height: 250px; visibility: hidden;"></textarea>
+
                         <button type="submit" class="btn btn-success">Submit</button>
                     </form>
                 </div>

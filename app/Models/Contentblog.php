@@ -5,16 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Blog extends Model
+class Contentblog extends Model
 {
     use HasFactory;
-    protected $table = 'blog';
+    protected $table = 'contentblog';
 
     protected $fillable = [
-        'Tittle', 'Description', 'Image'
+        'blog_id', 'content_blog'
     ];
-    public function content()
+    public function blog()
     {
-        return $this->hasMany(Blog::class);
+        return $this->belongsTo(User::class);
     }
 }
