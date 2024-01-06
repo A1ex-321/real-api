@@ -20,6 +20,7 @@ use App\Http\Controllers\web\CartController;
 use App\Http\Controllers\web\CheckoutController;
 use App\Http\Controllers\web\OrderDetailsController;
 use App\Http\Controllers\Admin\FranchiseController;
+use App\Http\Controllers\Admin\BlogController;
 
 // use App\Http\Controllers\Admin\Website;
 // use App\Http\Controllers\web\Website;
@@ -81,10 +82,23 @@ Route::group(['middleware' => 'admin'], function () {
     Route::patch('/orders/{orderId}/update-status', [OrdersController::class, 'updateStatus'])->name('orders.updateStatus');
     Route::delete('/orders/{orderId}', [OrdersController::class, 'destroy'])->name('orders.destroy');
     Route::get('admin/orders/{orderId}/invoice', [OrdersController::class, 'generateInvoice'])->name('orders.generateInvoice');
-
     Route::resource('admin/gallery', GalleryController::class);
-Route::get('mail1', [Website::class, 'mail']);
-
+    // Route::get('mail1', [Website::class, 'mail']);
+    Route::get('admin/blog/list', [BlogController::class, 'list'])->name('blog-list');
+    Route::get('admin/addblog/add', [BlogController::class, 'blog_add'])->name('add-blog');
+    Route::post('admin/addblog/add', [BlogController::class, 'create_blog'])->name('create-blog');
+    Route::get('admin/brand/delete/{id}', [BlogController::class, 'delete'])->name('delete-brand');
+    Route::get('admin/blog/edit/{id}', [BlogController::class, 'blog_edit']);
+    Route::post('admin/blog/edit/{id}', [BlogController::class, 'blog_update'])->name('update-brand');
+    Route::get('admin/addblogcontent/add', [BlogController::class, 'content_add'])->name('add-blogcontent');
+    // routes/web.php or routes/api.php
+Route::post('/upload-image', [BlogController::class, 'uploadImage'])->name('upload.image.route');
+Route::get('/content_add1', function () {
+    return view('editor');
+});
+Route::get('/editor', [BlogController::class, 'content_add1']);
+// routes/web.php
+Route::post('ckeditor/upload', [BlogController::class, 'upload'])->name('ckeditor.upload');
 
 });
 
