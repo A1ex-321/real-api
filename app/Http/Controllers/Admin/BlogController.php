@@ -75,24 +75,35 @@ class BlogController extends Controller
         $blog->blog_id = $request->blog_id;
         $blog->content_blog = $request->content_blog;
         $blog->save();
-        return redirect('admin/blog/list')->with('success', 'Blog uploaded successfully.');
+        return redirect('admin/blog/list')->with('success', 'content Blog uploaded successfully.');
     }
     public function create_blog(Request $request)
     {
-
-        $blog = new Blog;
-        $blog->Tittle = $request->Tittle;
-        $blog->Description = $request->Description;
-        $imageName = time() . '.' . $request->Image->extension();
-        $request->Image->move(public_path('images'), $imageName);
-        $blog->Image = $imageName;
-        $blog->save();
-        return redirect('admin/blog/list')->with('success', 'Blog uploaded successfully.');
+        try {
+            $blog = new Blog;
+            $blog->Tittle = $request->Tittle;
+            $blog->Description = $request->Description;
+    
+            if ($request->hasFile('Image')) {
+                $imageName = time() . '.' . $request->Image->extension();
+                $request->Image->move(public_path('images'), $imageName);
+                $blog->Image = $imageName;
+            }
+    
+            $blog->save();
+    
+            return redirect('admin/blog/list')->with('success', 'Blog uploaded successfully.');
+        } catch (\Exception $e) {
+            // Handle the exception (log or display an error message)
+            return redirect()->back()->with('error', 'An error occurred while uploading the blog.');
+        }
     }
+    
 
     public function list(Request $request)
     {
         $data['getRecord'] = Blog::all();
+        $data['getRecordcontent'] = Contentblog::all();
         $data['header_title'] = "Category List";
 
         return view('admin.blog.list', $data);
@@ -103,9 +114,27 @@ class BlogController extends Controller
         $data['getRecord'] = Blog::find($id);
         $data['header_title'] = "Edit blog";
 
-        return view('admin.blog.edit', $data);
+        return view('admin.blog.blog-edit', $data);
     }
+    public function content_edit($id, Request $request)
+    {
+        $data['getRecord'] = Contentblog::find($id);
+        $data['header_title'] = "Edit blog";
 
+        return view('admin.blog.content-edit', $data);
+    }
+    public function create_content_update_blog(Request $request,$id)
+    {
+        $blog = Contentblog::find($id);
+        if ($request->has('content_blog') && $request->filled('content_blog')) {
+            $blog->content_blog = $request->input('content_blog');
+        }    
+        else{
+            $blog->content_blog = $blog->content_blog;
+        }
+        $blog->save();
+        return redirect('admin/blog/list')->with('success', 'Blog updated successfully successfully.');
+    }
     public function blog_update($id, Request $request)
     {
 
@@ -121,19 +150,19 @@ class BlogController extends Controller
             $blog->Image = $blog->Image;
         }
         $blog->save();
-        return redirect('admin/blog/list')->with('success', '');
+        return redirect('admin/blog/list')->with('success', 'blog updated');
     }
 
     public function delete($id, Request $request)
     {
         $brand = Blog::find($id);
         $brand->delete();
-        return redirect()->back()->with('success', 'Brand Successfully Deleted');
+        return redirect()->back()->with('success', 'blog Successfully Deleted');
     }
     public function delete_blog($id, Request $request)
     {
         $brand = Contentblog::find($id);
         $brand->delete();
-        return redirect('admin/blog/list')->with('success', '');
+        return redirect('admin/blog/list')->with('success', 'blog content Deleted successful');
     }
 }

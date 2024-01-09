@@ -41,6 +41,9 @@ Route::post('/mail', [MailController::class, 'sendUserContact']);
 Route::post('/franchise', [FranchiseController::class, 'sendfranchiseContact']);
 Route::get('/blogs', [BlogController::class, 'index']);
 Route::get('/content_blogs/{id}', [BlogController::class, 'content_blog']);
+Route::get('/demo', [BlogController::class, 'demo']);
+
+
 
 
 

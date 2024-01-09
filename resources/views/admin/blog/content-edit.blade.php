@@ -16,11 +16,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <!-- Your existing form -->
-                    <form action="{{ route('create-content-blog') }}" method="post">
+                    <form action="{{ route('update-content', ['id' => $getRecord->id]) }}" method="post">
                         @csrf
-                        <input type="hidden" name="blog_id" value="{{ $blog->id }}">
+                       
 
-                        <textarea name="content_blog" id="editor" style="height: 250px; visibility: hidden;"></textarea>
+                        <textarea name="content_blog" id="editor" style="height: 250px; visibility: hidden;">{{ old('content_blog', $getRecord->content_blog) }}</textarea>
+
 
                         <button type="submit" class="btn btn-success">Submit</button>
                     </form>

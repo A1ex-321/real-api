@@ -38,7 +38,7 @@ use App\Http\Controllers\Admin\BlogController;
 |
 */
 
-Route::group(['middleware' => 'admin'], function () {
+Route::group(['middleware' => 'admin','web'], function () {
     //  Route::get('admin/brand/mail1', function () {Mail::to('alexalphons82@gmail.com')->send(new SendMail($data));});
 
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
@@ -73,7 +73,7 @@ Route::group(['middleware' => 'admin'], function () {
 
     // Route::get('admin/brand/mail/{arg1}/{arg2}', [BrandController::class, 'mail']);
 
-    
+
 
 
     Route::resource('admin/products', ProductController::class);
@@ -95,14 +95,15 @@ Route::group(['middleware' => 'admin'], function () {
     Route::get('view-blogcontent/{id}', [BlogController::class, 'content_view'])->name('view-blogcontent');
     Route::get('admin/blog/delete/{id}', [BlogController::class, 'delete_blog'])->name('delete-blog');
     // routes/web.php or routes/api.php
-Route::post('/upload-image', [BlogController::class, 'uploadImage'])->name('upload.image.route');
-Route::get('/content_add1', function () {
-    return view('editor');
-});
-Route::get('/editor', [BlogController::class, 'content_add1']);
-// routes/web.php
-Route::post('ckeditor/upload', [BlogController::class, 'upload'])->name('ckeditor.upload');
-
+    Route::post('/upload-image', [BlogController::class, 'uploadImage'])->name('upload.image.route');
+    Route::get('/content_add1', function () {
+        return view('editor');
+    });
+    Route::get('/editor', [BlogController::class, 'content_add1']);
+    // routes/web.php
+    Route::post('ckeditor/upload', [BlogController::class, 'upload'])->name('ckeditor.upload');
+    Route::get('admin/contentblog/edit/{id}', [BlogController::class, 'content_edit']);
+    Route::post('admin/updateblog/edit/{id}', [BlogController::class, 'create_content_update_blog'])->name('update-content');
 });
 
 
@@ -126,7 +127,7 @@ Route::get('shipping', [PageController::class, 'shipping'])->name('shipping');
 Route::get('gallery', [PageController::class, 'gallery'])->name('gallery');
 
 //Promotional Page
-Route::get('naattulife', [PageController::class, 'promotion'])->name('promotion');   
+Route::get('naattulife', [PageController::class, 'promotion'])->name('promotion');
 
 Route::middleware(['guest'])->group(function () {
     Route::get('login', [PageController::class, 'login'])->name('login');
@@ -152,7 +153,7 @@ Route::middleware(['web'])->group(function () {
 //checkout_process
 Route::get('/checkout/{id}', [PageController::class, 'checkout'])->name('checkout');
 Route::post('/place-order', [CheckoutController::class, 'placeOrder'])->name('place-order');
-Route::post('razorpay-payment',[CheckoutController::class,'store'])->name('razorpay.payment.store');
+Route::post('razorpay-payment', [CheckoutController::class, 'store'])->name('razorpay.payment.store');
 
 //orders
 

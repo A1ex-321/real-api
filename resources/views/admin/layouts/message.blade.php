@@ -1,9 +1,23 @@
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+<!-- SweetAlert2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
 @if (!empty(session('error')))
 <div class="alert alert-danger" role="alert">
     {{ session('error') }}
 </div>
 @endif
-
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: `{!! session('success') !!}`,
+        timer: 2000, // 2 seconds
+        // showConfirmButton: false,
+    });
+</script>
+@endif
 @if (!empty(session('warning')))
 <div class="alert alert-warning" role="alert">
     {{ session('warning') }}
@@ -22,11 +36,12 @@
 </div>
 @endif
 
-@if (!empty(session('success')))
+@if (session('success'))
 <div class="alert alert-success" role="alert">
     {{ session('success') }}
 </div>
 @endif
+
 
 @if (!empty(session('secondary')))
 <div class="alert alert-secondary" role="alert">
