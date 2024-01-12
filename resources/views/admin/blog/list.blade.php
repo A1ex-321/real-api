@@ -57,7 +57,6 @@
                                         <th>Title </th>
                                         <th>Description</th>
                                         <th>Image</th>
-                                        <th>Action</th>
                                         <th>View</th>
                                     </tr>
                                 </thead>
@@ -68,33 +67,6 @@
                                         <td>{{$value->Tittle}}</td>
                                         <td>{{$value->Description}}</td>
                                         <td><img src="{{ asset('public/images/' . $value->Image) }}" alt="Image" width="80" height="80"></td>
-
-                                        <td>
-                                            @php $buttonEnabled = false; @endphp
-                                            @foreach($getRecordcontent as $record)
-                                            @if($value->id == $record->blog_id)
-                                            @php $buttonEnabled = true; @endphp
-
-                                            <button onclick="return confirm('Please delete existing blog content')" style="padding: 8px;background-color: #f75d52; color: #0a0302; border: none;">
-                                                <i class="fas fa-plus"></i>
-                                                <span>Add Blog content</span>
-                                            </button>
-                                            @break
-                                            @endif
-                                            @endforeach
-
-                                            @if(!$buttonEnabled)
-                                            <a href="{{ route('add-blogcontent', ['id' => $value->id]) }}" class="btn">
-                                                <button style="padding: 8px; background-color: #cae8ca; color: #0a0302; border: none;">
-                                                    <i class="fas fa-plus"></i>
-                                                    <span>Add Blog content</span>
-                                                </button>
-                                            </a>
-                                            @endif
-                                        </td>
-
-
-
 
                                         <td>
                                             <button style="background-color: #cae8ca; color: #fff; border: none;">

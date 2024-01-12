@@ -21,6 +21,7 @@ use App\Http\Controllers\web\CheckoutController;
 use App\Http\Controllers\web\OrderDetailsController;
 use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\DemoController;
 
 // use App\Http\Controllers\Admin\Website;
 // use App\Http\Controllers\web\Website;
@@ -104,6 +105,21 @@ Route::group(['middleware' => 'admin','web'], function () {
     Route::post('ckeditor/upload', [BlogController::class, 'upload'])->name('ckeditor.upload');
     Route::get('admin/contentblog/edit/{id}', [BlogController::class, 'content_edit']);
     Route::post('admin/updateblog/edit/{id}', [BlogController::class, 'create_content_update_blog'])->name('update-content');
+    Route::get('admin/alex',[BlogController::class, 'demo']);
+    Route::post('/upload-images', [DemoController::class, 'upload'])->name('upload.images');
+    Route::post('image/upload/store', [DemoController::class, 'fileStore']);
+    Route::post('/image/remove', 'DemoController@fileRemove')->name('file.remove');
+    // routes/web.php or routes/web/web.php (depending on your Laravel version)
+     
+
+      Route::post('upload-multiple', [BlogController::class, 'uploadMultiple']);
+      Route::get('fetch-images', [BlogController::class, 'fetchImages'])->name('fetch.images');
+    //   Route::delete('delete-image/{filename}', [BlogController::class, 'deleteImage'])->name('delete.image');
+      Route::delete('/delete-image/{id}', [BlogController::class, 'deleteimage']);
+
+
+
+
 });
 
 
