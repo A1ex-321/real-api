@@ -27,14 +27,16 @@ class BlogController extends Controller
             $images = $request->file('multipleimage');
 
             foreach ($images as $image) {
-                $filename = time() . '_' . $image->getClientOriginalName();
+                $filename = time() . '_' . str_replace(' ', '_', $image->getClientOriginalName());
                 $image->move(public_path('images'), $filename);
-
+            
                 // Insert the filename into the 'blogimage' table
                 Blogimage::create([
                     'filename' => $filename,
                 ]);
             }
+            
+            
 
             return response()->json(['message' => 'Images uploaded successfully']);
         }
@@ -73,29 +75,7 @@ class BlogController extends Controller
             return response()->json(['error' => 'Error deleting image'], 500);
         }
     }
-    
-    // public function deleteImage($filename)
-    // {
-    //     // Assuming your images are stored in the public/images directory
-    //     $filePath = public_path('images/') . $filename;
-    
-    //     // Check if the file exists before attempting to delete it
-    //     if (File::exists($filePath)) {
-    //         // Delete the file
-    //         File::delete($filePath);
-    
-    //         // Delete the corresponding database record
-    //         $deletedImage = Blogimage::where('filename', $filename)->first();
-    
-    //         if ($deletedImage) {
-    //             $deletedImage->delete();
-    //             return response()->json(['message' => 'Image and database record deleted successfully']);
-    //         }
-    //     }
-    
-    //     return response()->json(['error' => 'Image not found'], 404);
-    // }
-
+   
     public function blog_add(Request $request)
     {
         Blogimage::truncate();
@@ -116,34 +96,6 @@ class BlogController extends Controller
         return view('admin.blog.viewcontent', compact('content', 'imageArray'));
     }
     
-    public function content_add1(Request $request)
-    {
-        // $data['header_title'] = "Add New Brand";
-        return view('editer');
-    }
-    
-    public function upload(Request $request)
-    {
-        // Log the request data
-        Log::info('Request Data:', $request->all());
-
-        $image = $request->file('upload');
-        $imageName = time() . '_' . str_replace(' ', '_', $image->getClientOriginalName());
-
-        // Log the file move result
-        $isMoved = $image->move(public_path('images'), $imageName);
-
-        // Check if the file move was successful and log accordingly
-        if ($isMoved) {
-            Log::info('File Move Success:', ['imageName' => $imageName]);
-        } else {
-            Log::error('File Move Failed:', ['imageName' => $imageName]);
-        }
-        Log::error('File :', ['url' => asset('public/images/' . $imageName)]);
-        return response()->json(['url' => asset('public/images/' . $imageName), 'uploaded' => 1]);
-    }
-
-
     public function create_content_blog(Request $request)
     {
         // dd($request->all());

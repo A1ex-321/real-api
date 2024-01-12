@@ -41,7 +41,7 @@
                                         <input type="text" name="Description" class="form-control" id="exampleInputEmail1" placeholder="Description" value="{{ $all->Description }}">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Image<span style="color:red">*</span></label>
+                                        <label for="exampleInputEmail1">Thumb Image<span style="color:red">*</span></label>
                                         <input type="text" class="form-control" readonly value="{{ $all->Image }}" />
                                     </div>
 

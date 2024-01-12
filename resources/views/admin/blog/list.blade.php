@@ -56,14 +56,18 @@
                                         <th>Id</th>
                                         <th>Title </th>
                                         <th>Description</th>
-                                        <th>Image</th>
+                                        <th>Thumb Image</th>
                                         <th>View</th>
+                                        <th>Edit & Delete</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
+                                @php $counter = 1; @endphp
+
                                     @foreach ($getRecord as $value)
                                     <tr>
-                                        <td>{{$value->id}}</td>
+                                    <td>{{ $counter++ }}</td>
                                         <td>{{$value->Tittle}}</td>
                                         <td>{{$value->Description}}</td>
                                         <td><img src="{{ asset('public/images/' . $value->Image) }}" alt="Image" width="80" height="80"></td>

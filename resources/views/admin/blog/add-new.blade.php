@@ -26,6 +26,7 @@
     .image-container {
         margin-right: 10px;
     }
+    
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -51,11 +52,11 @@
                                     <input type="text" name="Tittle" class="form-control" id="exampleInputEmail1" placeholder="Title" value="" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Description<span style="color:red">*</span></label>
+                                    <label for="exampleInputEmail1">Description<span style="color:red"></span></label>
                                     <input type="text" name="Description" class="form-control" id="exampleInputEmail1" placeholder="Description" value="">
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Image<span style="color:red">*</span></label>
+                                    <label for="exampleInputEmail1">Thumb Image<span style="color:red">*</span></label>
                                     <input type="file" name="Image" class="form-control" id="exampleInputEmail1" placeholder="Image" value="" required>
                                 </div>
                                 <input type="hidden" id="imageIds" name="multiimage" value="" >
@@ -206,126 +207,6 @@
 </script>
 
 
-<script>
-    $(document).ready(function() {
-        var uploadedImages = []; // Array to store image data
-        var fileArray = [];
 
-        $('#imageInput').on('change', function() {
-            var input = this;
-
-            if (input.files && input.files.length > 0) {
-                for (var i = 0; i < input.files.length; i++) {
-                    var reader = new FileReader();
-                    var file = input.files[i];
-                    var fileName = file.name;
-
-                    reader.onload = (function(name) {
-                        return function(e) {
-                            // Store original image data in the array
-                            uploadedImages.push({
-                                src: e.target.result,
-                                name: name
-                            });
-
-                            renderImages(); // Call a function to render images based on the array
-                        };
-                    })(fileName);
-
-                    reader.readAsDataURL(file);
-                }
-            }
-            console.log('All files:', uploadedImages);
-
-        });
-
-        // function renderImages() {
-        //     $('#preview').empty(); // Clear existing previews
-
-        //     // Render images based on the array
-        //     for (var i = 0; i < uploadedImages.length; i++) {
-        //         var imageContainer = '<div class="image-container" style="margin-top: 10px; position: relative;">' +
-        //     '<img src="' + uploadedImages[i].src + '" alt="' + uploadedImages[i].alt + '" class="preview-image" style="width: 100px; height: 100px;">' +
-        //     '<button id="' + uploadedImages[i].name + '" class="removeBtn" data-index="' + i + '" style="position: absolute; top: 0; right: 0;">&#10005;</button>' +
-        //     '</div>';
-
-        //         $('#preview').append(imageContainer);
-        //     }
-        // }
-
-        //         function replaceFileInput(fileArray) {
-        //     var fileInput = document.getElementById('imageInput');
-
-        //     // Unbind previous change event to avoid multiple bindings
-        //     $(fileInput).off('change');
-
-        //     // Clear the existing files
-        //     fileInput.value = '';
-
-        //     // Trigger change event to simulate user interaction
-        //     $(fileInput).change(function() {
-        //         handleFileUpload();
-        //     });
-
-        //     // Update attributes of the existing input element based on fileArray
-        //     if (fileArray.length > 0) {
-        //         fileInput.removeAttribute('id');
-        //         fileInput.removeAttribute('name');
-        //         fileInput.removeAttribute('multiple');
-
-        //         fileInput.id = 'imageInput';
-        //         fileInput.name = 'multipleimage[]';
-        //         fileInput.multiple = true;
-        //     }
-        // }
-
-
-
-
-
-
-
-        function handleFileUpload() {
-            var input = document.getElementById('imageInput');
-            var selectedFiles = input.files;
-
-            // 'selectedFiles' is a FileList, you can loop through it to access each file
-            for (var i = 0; i < selectedFiles.length; i++) {
-                var file = selectedFiles[i];
-                var fileInfo = {
-                    name: file.name,
-                    type: file.type,
-                    size: file.size
-                };
-                fileArray.push(fileInfo);
-            }
-
-            console.log('All files fill:', fileArray);
-
-        }
-        document.getElementById('imageInput').addEventListener('change', handleFileUpload);
-
-        $('#preview').on('click', '.removeBtn', function() {
-            var index = $(this).data('index');
-            var clickedImageName = uploadedImages[index].name;
-            var clickedFileName = fileArray[index].name;
-            console.log('clickedImageName:', clickedImageName);
-            console.log('clickedFileName:', clickedFileName);
-            if (clickedImageName == clickedFileName) {
-                uploadedImages.splice(index, 1);
-                fileArray.splice(index, 1);
-                renderImages();
-                replaceFileInput(fileArray); // Replace the file input after removing images
-
-            }
-            console.log('All files fill after:', fileArray);
-            console.log('All files:after', uploadedImages);
-
-
-        });
-
-
-    });
-</script>
 
 @endpush
