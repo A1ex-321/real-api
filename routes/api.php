@@ -44,6 +44,9 @@ Route::get('/content_blogs/{id}', [BlogController::class, 'content_blog']);
 Route::get('/demo', [BlogController::class, 'demo']);
 
 
+Route::get('/blogsimage/{id}', [BlogController::class, 'blogimage']);
+
+
 
 
 

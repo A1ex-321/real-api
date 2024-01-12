@@ -3,6 +3,30 @@
 
 @section('content')
 
+<style>
+    /* styles.css */
+    .container {
+        text-align: center;
+        color: #333;
+    }
+
+    /* styles.css */
+    .title {
+        background-color: #2ECDB7;
+        color: #ffffff;
+        padding: 13px;
+
+    }
+
+    .subtitle {
+        background-color: #2ECCFA;
+        color: #ffffff;
+        padding: 5px;
+        margin-top: 17px !important;
+        padding: 20px;
+
+    }
+</style>
 
 
 <div class="content-wrapper">
@@ -20,79 +44,38 @@
 
 
 
-                        <a href="{{route('create-blog')}}" class="btn btn-block btn-primary">
-                            Add Blog
+                        <a href="{{route('blog-list')}}" class="btn btn-block btn-primary">
+                            Back
                         </a>
                     </ol>
 
                 </div><!-- /.col -->
+                <div class="container" style="text-align: center; color: #333;">
+
+                    <h1 class="subtitle">Title&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{ $content->Tittle }}</h1>
+                    <h3 class="title">Description&nbsp;&nbsp;&nbsp;:&nbsp;&nbsp;&nbsp;{{ $content->Description }}&nbsp;&nbsp;&nbsp;</h3>
+
+
+                    @if ($imageArray)
+                    <div class="row" >
+                        @foreach ($imageArray as $image)
+                        <div class="col-md-3 mb-3 d-flex align-items-center" style="background-color: #f0f0f0; border: 2px solid #3498db; margin: 1px;">
+                            <img src="{{ asset('public/images/' . $image) }}" alt="Image" class="img-fluid" style="width: 500px; height: 300px;">
+                        </div>
+                        @endforeach
+                    </div>
+
+                    @endif
+                </div>
+
+
             </div><!-- /.row -->
         </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
 
     <!-- Main content -->
-    <div class="content">
-        <div class="container">
-            <div class="row">
-                <div class="text-center mt-1 mb-2">
 
-
-                </div>
-                {{-- Start - Content comes here --}}
-                <div class="col-md-12">
-                    @include('admin.layouts.message')
-                    <div class="card">
-
-                        <div class="card-header">
-                            <h3 class="card-title"></h3>
-
-                        </div>
-                        <!-- /.card-header -->
-                        <div class="card-body p-0">
-
-                            <div class="text-center" style="background-color: #cce0df; padding: 2%">
-
-                                <div class="container" style="max-width: 800px;">
-                                    @if($content && !empty($content->content_blog))
-                                    <div style="padding: 10%;">
-                                        {!! html_entity_decode($content->content_blog) !!}
-                                    </div>
-                                    <div class="row justify-content-center">
-                                        <div class="col-md-4" style="margin-bottom: 1%;width:75%">
-                                            <a onclick="return confirm('Are you sure you want to delete?')" href="{{url('admin/blog/delete/'.$content->id)}}" class="btn btn-sm btn-block btn-primary">Delete content</a>
-                                        </div>
-                                        <div class="col-md-4" style="margin-bottom: 1%;">
-                                            <a href="{{url('admin/contentblog/edit/'.$content->id)}}" class="btn btn-sm btn-block btn-primary">Edit content</a>
-                                        </div>
-                                    </div>
-                                    @else
-                                    <p>No content available. Please create.</p>
-                                    @endif
-                                </div>
-
-                            </div>
-
-
-                        </div>
-                        <!-- /.card-body -->
-                    </div>
-                </div>
-
-
-
-
-
-
-
-
-
-                {{-- End - Content comes here --}}
-            </div>
-            <!-- /.row -->
-        </div>
-        <!-- /.container-fluid -->
-    </div>
     <!-- /.content -->
 </div>
 @endsection

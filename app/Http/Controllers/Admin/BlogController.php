@@ -110,19 +110,18 @@ class BlogController extends Controller
     }
     public function content_view(Request $request, $id)
     {
-        // $data['blog'] = Blog::find($id);
-        // $data['header_title'] = "Add New Brand";
-        // Get user's orders
-        $content = Contentblog::where('blog_id', $id)->first();
-        //  $content = $user->content;
-        // dd($content);
-        return view('admin.blog.viewcontent', compact('content'));
+        $content = Blog::where('id', $id)->first();
+        $imageArray = $content->multiimage ? explode(',', $content->multiimage) : [];
+    
+        return view('admin.blog.viewcontent', compact('content', 'imageArray'));
     }
+    
     public function content_add1(Request $request)
     {
         // $data['header_title'] = "Add New Brand";
         return view('editer');
     }
+    
     public function upload(Request $request)
     {
         // Log the request data

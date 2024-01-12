@@ -47,8 +47,8 @@
 
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Tittle<span style="color:red">*</span></label>
-                                    <input type="text" name="Tittle" class="form-control" id="exampleInputEmail1" placeholder="Tittle" value="{{old('Tittle', $getRecord->Tittle)}}" required>
+                                    <label for="exampleInputEmail1">Title<span style="color:red">*</span></label>
+                                    <input type="text" name="Tittle" class="form-control" id="exampleInputEmail1" placeholder="Title" value="{{old('Tittle', $getRecord->Tittle)}}" required>
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Description<span style="color:red">*</span></label>
