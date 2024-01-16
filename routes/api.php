@@ -45,7 +45,7 @@ Route::post('/franchise', [FranchiseController::class, 'sendfranchiseContact']);
 Route::post('/mail', [BlogController::class, 'sendUserContact']);
 Route::get('/api/blogs', [BlogController::class, 'index']);
 Route::get('/api/blogs/{id}', [BlogController::class, 'blogbyid']);
-
+Route::get('/api/logo', [BlogController::class, 'get_logo']);
 Route::get('/content_blogs/{id}', [BlogController::class, 'content_blog']);
 Route::get('/demo', [BlogController::class, 'demo']);
 

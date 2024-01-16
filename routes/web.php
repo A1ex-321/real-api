@@ -86,8 +86,12 @@ Route::group(['middleware' => 'admin','web'], function () {
     Route::resource('admin/gallery', GalleryController::class);
     // Route::get('mail1', [Website::class, 'mail']);
     Route::get('admin/blog/list', [BlogController::class, 'list'])->name('blog-list');
+    Route::get('admin/logo/logo', [BlogController::class, 'logo'])->name('blog-logo');
+
     Route::get('admin/addblog/add', [BlogController::class, 'blog_add'])->name('add-blog');
     Route::post('admin/addblog/add', [BlogController::class, 'create_blog'])->name('create-blog');
+    Route::post('admin/addlogo/logo', [BlogController::class, 'create_logo'])->name('create-logo');
+    Route::get('admin/logo/delete/{id}', [BlogController::class, 'gallery_delete'])->name('delete-brand');
     Route::get('admin/brand/delete/{id}', [BlogController::class, 'delete'])->name('delete-brand');
     Route::get('admin/blog/edit/{id}', [BlogController::class, 'blog_edit']);
     Route::post('admin/blog/edit/{id}', [BlogController::class, 'blog_update'])->name('update-brand');

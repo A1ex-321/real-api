@@ -14,6 +14,8 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Blog;
 use App\Models\Blogimage;
+use App\Models\Gallery;
+
 use Illuminate\Support\Facades\File;
 
 use Illuminate\Support\Facades\Log;
@@ -75,7 +77,23 @@ class BlogController extends Controller
             return response()->json(['error' => 'Error deleting image'], 500);
         }
     }
-   
+    public function create_logo(Request $request)
+    {
+        // dd($request->all());
+        if ($request->hasFile('image')) {
+            $images = $request->file('image');
+
+                $filename = time() . '_' . str_replace(' ', '_', $images->getClientOriginalName());
+                $images->move(public_path('images'), $filename);
+            
+                // Insert the filename into the 'blogimage' table
+                Gallery::create([
+                    'image' => $filename,
+                ]);
+                return redirect('admin/logo/logo')->with('success', 'content Blog uploaded successfully.');        }
+
+        return response()->json(['error' => 'No images selected'], 400);
+    }
     public function blog_add(Request $request)
     {
         Blogimage::truncate();
@@ -145,7 +163,12 @@ class BlogController extends Controller
 
         return view('admin.blog.list', $data);
     }
-
+    public function logo(Request $request)
+    {
+        $data['getRecord'] = Gallery::all();
+        // dd($data['getRecord']);
+        return view('admin.blog.logo', $data);
+    }
     public function blog_edit($id, Request $request)
     {
         Blogimage::truncate();
@@ -228,6 +251,12 @@ class BlogController extends Controller
         $brand = Contentblog::find($id);
         $brand->delete();
         return redirect('admin/blog/list')->with('success', 'blog content Deleted successful');
+    }
+    public function gallery_delete($id, Request $request)
+    {
+        $image = Gallery::find($id);
+        $image->delete();
+        return redirect('admin/logo/logo')->with('success', 'blog content Deleted successful');
     }
     public function demo()
     {

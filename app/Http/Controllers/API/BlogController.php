@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Blog;
+use App\Models\Gallery;
 use App\Models\Mailstores;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -96,6 +97,23 @@ class BlogController extends Controller
             return response()->json(['message' => 'Email sent successfully']);
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+    }
+    public function get_logo()
+    {
+        try {
+            $logo = Gallery::first();
+
+
+            // Add image URLs for each filename in multiimage
+
+                // Assuming the 'Image' field stores the filename
+                $logo->image = asset('public/images/' . $logo->image);
+            
+
+            return response()->json(['logo' => $logo]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Internal Server Error'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }

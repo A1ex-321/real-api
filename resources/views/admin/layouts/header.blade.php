@@ -149,6 +149,16 @@
             </p>
           </a>
         </li> 
+        <li class="nav-item">
+          <a href="{{route('blog-logo')}}"
+            class="nav-link {{ request()->segment(2) === 'logo' ? 'active' : '' }}">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+
+            <p>
+            Logo
+            </p>
+          </a>
+        </li> 
         <!-- <li class="nav-item">
           <a href="{{route('products.index')}}"
             class="nav-link {{ request()->segment(2) === 'products' ? 'active' : '' }}">
