@@ -212,6 +212,7 @@ class BlogController extends Controller
     } 
 
     $blog->save();
+    Blogimage::truncate();
 
     return redirect('admin/blog/list')->with('success', 'Blog updated');
 }

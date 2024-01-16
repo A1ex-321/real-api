@@ -26,7 +26,6 @@
     .image-container {
         margin-right: 10px;
     }
-    
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -53,13 +52,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Description<span style="color:red"></span></label>
-                                    <input type="text" name="Description" class="form-control" id="exampleInputEmail1" placeholder="Description" value="">
+                                   <textarea name="Description" class="form-control" id="exampleInputEmail1" placeholder="Description" style="width: 100%; height: 100px;"></textarea>
+
+
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Thumb Image<span style="color:red">*</span></label>
                                     <input type="file" name="Image" class="form-control" id="exampleInputEmail1" placeholder="Image" value="" required>
                                 </div>
-                                <input type="hidden" id="imageIds" name="multiimage" value="" >
+                                <input type="hidden" id="imageIds" name="multiimage" value="">
 
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Multiple Image<span style="color:red">*</span></label>
@@ -129,40 +130,41 @@
 
 
         function fetchImages() {
-    $.ajax({
-        url: '{{ url("fetch-images") }}', // Replace with your actual route for fetching images
-        method: 'GET',
-        success: function(response) {
-            // Clear previous preview
-            $('#preview').empty();
+            $.ajax({
+                url: '{{ url("fetch-images") }}', // Replace with your actual route for fetching images
+                method: 'GET',
+                success: function(response) {
+                    // Clear previous preview
+                    $('#preview').empty();
 
-            var imageIds = '';  // String to store image IDs
+                    var imageIds = ''; // String to store image IDs
 
-            // Loop through the image URLs and create image elements for preview
-            response.images.forEach(function(imageUrl) {
-                var imageHtml = '<div class="preview-item" style="position: relative; width: 100px; height: 100px;">';
-                imageHtml += '<img src="' + imageUrl.url + '" class="preview-image" alt="Preview Image" style="width: 100%; height: 100%;">';
-                imageHtml += '<button class="delete-btn" data-id="' + imageUrl.id + '" style="position: absolute; top: 0; right: 0; background-color: white; border: none; padding: 5px; cursor: pointer; color: red; font-size: 16px;" type="button">&#10005;</button>';
-                imageHtml += '</div>';
+                    // Loop through the image URLs and create image elements for preview
+                    response.images.forEach(function(imageUrl) {
+                        var imageHtml = '<div class="preview-item" style="position: relative; width: 100px; height: 100px; margin-right: 25px; margin-bottom: 25px;">';
+                        imageHtml += '<img src="' + imageUrl.url + '" class="preview-image" alt="Preview Image" style="width: 100%; height: 100%;">';
+                        imageHtml += '<button class="delete-btn" data-id="' + imageUrl.id + '" style="position: absolute; top: 0; right: 0; background-color: black; border: none; padding: 5px; cursor: pointer; color: red; font-size: 16px;" type="button">&#10005;</button>';
+                        imageHtml += '</div>';
 
-                $('#preview').append(imageHtml);
+                        $('#preview').append(imageHtml);
 
-                // Append the image ID to the string
-                imageIds += imageUrl.id + ',';
+                        // Append the image ID to the string
+                        imageIds += imageUrl.id + ',';
+
+                    });
+
+                    // Remove the trailing comma
+                    imageIds = imageIds.slice(0, -1);
+
+                    // Set the value of the hidden input
+                    $('#imageIds').val(imageIds);
+                },
+                error: function(error) {
+                    console.error('Error fetching images:', error);
+                    // Handle errors if any
+                }
             });
-
-            // Remove the trailing comma
-            imageIds = imageIds.slice(0, -1);
-
-            // Set the value of the hidden input
-            $('#imageIds').val(imageIds);
-        },
-        error: function(error) {
-            console.error('Error fetching images:', error);
-            // Handle errors if any
         }
-    });
-}
 
         // Add CSRF token to formData
         // formData.append('_token', '{{ csrf_token() }}');

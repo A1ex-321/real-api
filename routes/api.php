@@ -39,7 +39,13 @@ Route::get('/records', [CategoryController::class, 'index']);
 Route::get('/category/{id}', [CategoryController::class, 'categorys']);
 Route::post('/mail', [MailController::class, 'sendUserContact']);
 Route::post('/franchise', [FranchiseController::class, 'sendfranchiseContact']);
-Route::get('/blogs', [BlogController::class, 'index']);
+
+
+
+Route::post('/mail', [BlogController::class, 'sendUserContact']);
+Route::get('/api/blogs', [BlogController::class, 'index']);
+Route::get('/api/blogs/{id}', [BlogController::class, 'blogbyid']);
+
 Route::get('/content_blogs/{id}', [BlogController::class, 'content_blog']);
 Route::get('/demo', [BlogController::class, 'demo']);
 

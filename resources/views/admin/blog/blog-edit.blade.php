@@ -51,8 +51,9 @@
                                     <input type="text" name="Tittle" class="form-control" id="exampleInputEmail1" placeholder="Title" value="{{old('Tittle', $getRecord->Tittle)}}" required>
                                 </div>
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Description<span style="color:red">*</span></label>
-                                    <input type="text" name="Description" class="form-control" id="exampleInputEmail1" placeholder="Description" value="{{old('Tittle', $getRecord->Description)}}">
+                                    <label for="exampleInputEmail1">Description<span style="color:red"></span></label>
+                                    <textarea name="Description" class="form-control" id="exampleInputEmail1" placeholder="Description"style="width: 100%; height: 100px;">{{ old('Tittle', $getRecord->Description) }}</textarea>
+
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Image<span style="color:red">*</span></label>
