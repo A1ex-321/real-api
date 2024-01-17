@@ -9,6 +9,7 @@ use App\Http\Controllers\API\CategoryController;
 use App\Http\Controllers\API\MailController;
 use App\Http\Controllers\API\FranchiseController;
 use App\Http\Controllers\API\BlogController;
+use App\Http\Controllers\API\ScoController;
 
 
 
@@ -48,11 +49,11 @@ Route::get('/api/blogs/{id}', [BlogController::class, 'blogbyid']);
 Route::get('/api/logo', [BlogController::class, 'get_logo']);
 Route::get('/content_blogs/{id}', [BlogController::class, 'content_blog']);
 Route::get('/demo', [BlogController::class, 'demo']);
-
-
 Route::get('/blogsimage/{id}', [BlogController::class, 'blogimage']);
 
-
+// cso
+Route::get('/home', [ScoController::class, 'home']);
+Route::get('/link', [ScoController::class, 'link']);
 
 
 

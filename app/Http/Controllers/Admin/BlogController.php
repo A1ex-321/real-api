@@ -256,7 +256,7 @@ class BlogController extends Controller
     {
         $image = Gallery::find($id);
         $image->delete();
-        return redirect('admin/logo/logo')->with('success', 'blog content Deleted successful');
+        return redirect('admin/logo/logo')->with('success', 'Deleted successful');
     }
     public function demo()
     {

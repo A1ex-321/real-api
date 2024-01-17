@@ -159,6 +159,66 @@
             </p>
           </a>
         </li> 
+        <li class="nav-item">
+          <a href="{{route('sco-list')}}"
+            class="nav-link {{ request()->segment(2) === 'sco' ? 'active' : '' }}">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+
+            <p>
+            Sco link
+            </p>
+          </a>
+        </li> 
+        <li class="nav-item">
+          <a href="{{route('home-list')}}"
+            class="nav-link {{ request()->segment(2) === 'home' ? 'active' : '' }}">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+
+            <p>
+            Home
+            </p>
+          </a>
+        </li> 
+        <li class="nav-item">
+          <a href="{{route('about-list')}}"
+            class="nav-link {{ request()->segment(2) === 'about' ? 'active' : '' }}">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+
+            <p>
+            About As
+            </p>
+          </a>
+        </li> 
+        <li class="nav-item">
+          <a href="{{route('service-list')}}"
+            class="nav-link {{ request()->segment(2) === 'service' ? 'active' : '' }}">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+
+            <p>
+            Services
+            </p>
+          </a>
+        </li> 
+        <li class="nav-item">
+          <a href="{{route('blogsco-list')}}"
+            class="nav-link {{ request()->segment(2) === 'blogsco' ? 'active' : '' }}">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+
+            <p>
+            Blog
+            </p>
+          </a>
+        </li> 
+        <li class="nav-item">
+          <a href="{{route('contact-list')}}"
+            class="nav-link {{ request()->segment(2) === 'contact' ? 'active' : '' }}">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+
+            <p>
+            Contact
+            </p>
+          </a>
+        </li> 
         <!-- <li class="nav-item">
           <a href="{{route('products.index')}}"
             class="nav-link {{ request()->segment(2) === 'products' ? 'active' : '' }}">

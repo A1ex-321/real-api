@@ -22,6 +22,8 @@ use App\Http\Controllers\web\OrderDetailsController;
 use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\DemoController;
+use App\Http\Controllers\Admin\ScoController;
+
 
 // use App\Http\Controllers\Admin\Website;
 // use App\Http\Controllers\web\Website;
@@ -39,7 +41,7 @@ use App\Http\Controllers\Admin\DemoController;
 |
 */
 
-Route::group(['middleware' => 'admin','web'], function () {
+Route::group(['middleware' => 'admin', 'web'], function () {
     //  Route::get('admin/brand/mail1', function () {Mail::to('alexalphons82@gmail.com')->send(new SendMail($data));});
 
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
@@ -109,21 +111,53 @@ Route::group(['middleware' => 'admin','web'], function () {
     Route::post('ckeditor/upload', [BlogController::class, 'upload'])->name('ckeditor.upload');
     Route::get('admin/contentblog/edit/{id}', [BlogController::class, 'content_edit']);
     Route::post('admin/updateblog/edit/{id}', [BlogController::class, 'create_content_update_blog'])->name('update-content');
-    Route::get('admin/alex',[BlogController::class, 'demo']);
+    Route::get('admin/alex', [BlogController::class, 'demo']);
     Route::post('/upload-images', [DemoController::class, 'upload'])->name('upload.images');
     Route::post('image/upload/store', [DemoController::class, 'fileStore']);
     Route::post('/image/remove', 'DemoController@fileRemove')->name('file.remove');
     // routes/web.php or routes/web/web.php (depending on your Laravel version)
-     
 
-      Route::post('upload-multiple', [BlogController::class, 'uploadMultiple']);
-      Route::get('fetch-images', [BlogController::class, 'fetchImages'])->name('fetch.images');
+
+    Route::post('upload-multiple', [BlogController::class, 'uploadMultiple']);
+    Route::get('fetch-images', [BlogController::class, 'fetchImages'])->name('fetch.images');
     //   Route::delete('delete-image/{filename}', [BlogController::class, 'deleteImage'])->name('delete.image');
-      Route::delete('/delete-image/{id}', [BlogController::class, 'deleteimage']);
-
-
-
-
+    Route::delete('/delete-image/{id}', [BlogController::class, 'deleteimage']);
+    //   SCO link
+    Route::get('admin/sco/scolist', [ScoController::class, 'scolist'])->name('sco-list');
+    Route::post('admin/sco/addlink', [ScoController::class, 'create_link'])->name('create-link');
+    Route::get('admin/sco/delete/{id}', [ScoController::class, 'link_delete']);
+    Route::get('admin/link/edit/{id}', [ScoController::class, 'link_edit']);
+    Route::post('admin/link/edit/{id}', [ScoController::class, 'link_update'])->name('update-link');
+    //   SCO home
+    Route::get('admin/home/homelist', [ScoController::class, 'homelist'])->name('home-list');
+    Route::post('admin/home/addhome', [ScoController::class, 'create_home'])->name('create-home');
+    Route::get('admin/home/delete/{id}', [ScoController::class, 'home_delete']);
+    Route::get('admin/home/edit/{id}', [ScoController::class, 'home_edit']);
+    Route::post('admin/home/edit/{id}', [ScoController::class, 'home_update'])->name('home-update');
+    //   SCO About
+    Route::get('admin/about/aboutlist', [ScoController::class, 'aboutlist'])->name('about-list');
+    Route::post('admin/about/addabout', [ScoController::class, 'create_about'])->name('create-about');
+    Route::get('admin/about/delete/{id}', [ScoController::class, 'about_delete']);
+    Route::get('admin/about/edit/{id}', [ScoController::class, 'about_edit']);
+    Route::post('admin/about/edit/{id}', [ScoController::class, 'about_update'])->name('about-update');
+    //   SCO service
+    Route::get('admin/service/servicelist', [ScoController::class, 'servicelist'])->name('service-list');
+    Route::post('admin/service/addservice', [ScoController::class, 'create_service'])->name('create-service');
+    Route::get('admin/service/delete/{id}', [ScoController::class, 'service_delete']);
+    Route::get('admin/service/edit/{id}', [ScoController::class, 'service_edit']);
+    Route::post('admin/service/edit/{id}', [ScoController::class, 'service_update'])->name('service-update');
+     //   SCO contact
+     Route::get('admin/contact/contactlist', [ScoController::class, 'contactlist'])->name('contact-list');
+     Route::post('admin/contact/addcontact', [ScoController::class, 'create_contact'])->name('create-contact');
+     Route::get('admin/contact/delete/{id}', [ScoController::class, 'contact_delete']);
+     Route::get('admin/contact/edit/{id}', [ScoController::class, 'contact_edit']);
+     Route::post('admin/contact/edit/{id}', [ScoController::class, 'contact_update'])->name('contact-update');
+      //   SCO blog
+    Route::get('admin/blogsco/bloglist', [ScoController::class, 'bloglist'])->name('blogsco-list');
+    Route::post('admin/blogsco/addblog', [ScoController::class, 'create_blogsco'])->name('create-blogsco');
+    Route::get('admin/blogsco/delete/{id}', [ScoController::class, 'blogsco_delete']);
+    Route::get('admin/blogsco/edit/{id}', [ScoController::class, 'blogsco_edit']);
+    Route::post('admin/blog/edit/{id}', [ScoController::class, 'blogsco_update'])->name('blogsco-update');
 });
 
 
