@@ -11,7 +11,7 @@ class Home extends Model
     protected $table = 'home';
 
     protected $fillable = [
-        'metadescription','metatitle' 
+        'metadescription','metatitle','ogtitle' 
     ];
  
 }

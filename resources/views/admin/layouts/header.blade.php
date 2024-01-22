@@ -179,7 +179,7 @@
             </p>
           </a>
         </li> 
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a href="{{route('about-list')}}"
             class="nav-link {{ request()->segment(2) === 'about' ? 'active' : '' }}">
             <i class="fa fa-tasks" aria-hidden="true"></i>
@@ -188,8 +188,8 @@
             About As
             </p>
           </a>
-        </li> 
-        <li class="nav-item">
+        </li>  -->
+        <!-- <li class="nav-item">
           <a href="{{route('service-list')}}"
             class="nav-link {{ request()->segment(2) === 'service' ? 'active' : '' }}">
             <i class="fa fa-tasks" aria-hidden="true"></i>
@@ -198,18 +198,18 @@
             Services
             </p>
           </a>
-        </li> 
+        </li>  -->
         <li class="nav-item">
           <a href="{{route('blogsco-list')}}"
             class="nav-link {{ request()->segment(2) === 'blogsco' ? 'active' : '' }}">
             <i class="fa fa-tasks" aria-hidden="true"></i>
 
             <p>
-            Blog
+            SEO Blog
             </p>
           </a>
         </li> 
-        <li class="nav-item">
+        <!-- <li class="nav-item">
           <a href="{{route('contact-list')}}"
             class="nav-link {{ request()->segment(2) === 'contact' ? 'active' : '' }}">
             <i class="fa fa-tasks" aria-hidden="true"></i>
@@ -218,7 +218,7 @@
             Contact
             </p>
           </a>
-        </li> 
+        </li>  -->
         <!-- <li class="nav-item">
           <a href="{{route('products.index')}}"
             class="nav-link {{ request()->segment(2) === 'products' ? 'active' : '' }}">

@@ -51,9 +51,13 @@ Route::get('/content_blogs/{id}', [BlogController::class, 'content_blog']);
 Route::get('/demo', [BlogController::class, 'demo']);
 Route::get('/blogsimage/{id}', [BlogController::class, 'blogimage']);
 
-// cso
+// sco
 Route::get('/home', [ScoController::class, 'home']);
 Route::get('/link', [ScoController::class, 'link']);
+//seo blog
+Route::get('/seoblogs', [BlogController::class, 'scoblogs']);
+Route::get('/blogsco/{id}', [BlogController::class, 'blogsco']);
+
 
 
 

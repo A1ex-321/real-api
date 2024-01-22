@@ -157,7 +157,8 @@ Route::group(['middleware' => 'admin', 'web'], function () {
     Route::post('admin/blogsco/addblog', [ScoController::class, 'create_blogsco'])->name('create-blogsco');
     Route::get('admin/blogsco/delete/{id}', [ScoController::class, 'blogsco_delete']);
     Route::get('admin/blogsco/edit/{id}', [ScoController::class, 'blogsco_edit']);
-    Route::post('admin/blog/edit/{id}', [ScoController::class, 'blogsco_update'])->name('blogsco-update');
+    Route::post('admin/blogsco/edit/{id}', [ScoController::class, 'blogsco_update'])->name('blogsco-update');
+    Route::get('view_blogcontent/{id}', [ScoController::class, 'content_view'])->name('view_blogcontent');
 });
 
 

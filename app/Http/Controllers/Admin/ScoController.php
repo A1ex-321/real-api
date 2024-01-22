@@ -71,6 +71,12 @@ class ScoController extends Controller
         $data = new Home();
         $data->metatitle = $request->metatitle;
         $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogdescription;
+        $data->ogimage = $request->ogimage;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
+
 
         $data->save();
         return redirect('admin/home/homelist')->with('success', ' Added successfully.');
@@ -91,6 +97,11 @@ class ScoController extends Controller
         $data = Home::find($id);
         $data->metatitle = $request->metatitle;
         $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogdescription;
+        $data->ogimage = $request->ogimage;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
         $data->save();
 
         return redirect('admin/home/homelist')->with('success', ' updated');
@@ -212,10 +223,19 @@ class ScoController extends Controller
     }
     public function create_blogsco(Request $request)
     {
-        // dd($request->all());
+        //  dd($request->all());
         $data = new blogsco();
-        $data->metatitle = $request->metatitle;
-        $data->metadescription = $request->metadescription;
+        $data->title = $request->title;
+        $data->description = $request->description;
+        $data->content = $request->content;
+        if ($request->hasFile('image')) {
+            $images = $request->file('image');
+
+            $filename = time() . '_' . str_replace(' ', '_', $images->getClientOriginalName());
+            $images->move(public_path('images'), $filename);                   
+        }
+        $data->image = $filename;
+
 
         $data->save();
         return redirect('admin/blogsco/bloglist')->with('success', ' Added successfully.');
@@ -234,9 +254,34 @@ class ScoController extends Controller
     public function blogsco_update($id, Request $request)
     {
         $data = blogsco::find($id);
-        $data->metatitle = $request->metatitle;
-        $data->metadescription = $request->metadescription;
+        $data->title = $request->title;
+        $data->description = $request->description;
+        $data->content = $request->content;
+        if ($request->hasFile('image')) {
+            $images = $request->file('image');
+
+            $filename = time() . '_' . str_replace(' ', '_', $images->getClientOriginalName());
+            $images->move(public_path('images'), $filename);    
+            $data->image = $filename;               
+        }
+        else{
+            $data->image = $data->image; 
+        }
         $data->save();
         return redirect('admin/blogsco/bloglist')->with('success', ' updated');
     }
+    public function content_view(Request $request, $id)
+    {
+        $content = blogsco::where('id', $id)->first();
+        // $imageArray = $content->multiimage ? explode(',', $content->multiimage) : [];
+
+        return view('admin.sco.view_blogcontent', compact('content'));
+    }
 }
+
+
+
+
+
+
+

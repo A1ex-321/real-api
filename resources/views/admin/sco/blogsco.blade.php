@@ -2,7 +2,21 @@
 
 
 @section('content')
+<style type="text/css">
+    .ck-editor__editable_inline {
+        height: 250Px;
+    }
+</style>
 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Blog</title>
+
+    <!-- Include jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+</head>
 <!-- SweetAlert2 CSS -->
 
 
@@ -38,22 +52,33 @@
                         </div>
                         <div class="container">
                             <form action="{{ route('create-blogsco') }}" method="post" enctype="multipart/form-data">
-                            @csrf
+                                {{csrf_field()}}
+
 
                                 <div class="card-body">
-                                    <!-- Form inputs here -->
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Meta Title<span style="color:red">*</span></label>
-                                        <input type="text" name="metatitle" class="form-control" id="exampleInputEmail1" placeholder="" value="" required>
+                                        <label for="exampleInputEmail1">Title<span style="color:red">*</span></label>
+                                        <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="Title" value="" required>
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Meta Description<span style="color:red">*</span></label>
-                                        <input type="text" name="metadescription" class="form-control" id="exampleInputEmail1" placeholder="" value="" required>
+                                        <label for="exampleInputEmail1">Description<span style="color:red"></span></label>
+                                        <textarea name="description" class="form-control" id="exampleInputEmail1" placeholder="Description" style="width: 100%; height: 100px;"></textarea>
+
+
                                     </div>
-                                </div>
-                                <div class="card-footer">
-                                    <button type="submit" class="btn btn-info">Submit</button>
-                                </div>
+                                    <div class="form-group">
+                                        <label for="editor">Content</label>
+                                        <textarea name="content" id="editor" style="height: 250px; visibility: hidden;"></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Thumb Image<span style="color:red">*</span></label>
+                                        <input type="file" name="image" class="form-control" id="exampleInputEmail1" placeholder="Image" value="" required>
+                                    </div>
+                                    <!-- /.card-body -->
+                                    <div class="card-footer">
+                                        <button type="submit" class="btn btn-info">Submit</button>
+                                    </div>
                             </form>
 
 
@@ -77,7 +102,7 @@
                 {{-- Start - Content comes here --}}
                 <div class="col-12">
                     @include('admin.layouts.message')
-<p>(**only first link will be work.If exists please delete**)</p>
+                    <p></p>
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title"></h3>
@@ -91,6 +116,8 @@
                                         <th>Id</th>
                                         <th>Title</th>
                                         <th>Description</th>
+                                        <th>Thum Image</th>
+                                        <th>view content</th>
                                         <th>Edit & Delete</th>
 
                                     </tr>
@@ -101,11 +128,19 @@
                                     @foreach ($getRecord as $value)
                                     <tr>
                                         <td>{{ $counter++ }}</td>
-                                        <td>{{ $value->metatitle }}</td>
-                                        <td>{{ $value->metadescription }}</td>
+                                        <td>{{ $value->title }}</td>
+                                        <td>{{ $value->description }}</td>
+                                        <td> <img src="{{ asset('public/images/' . $value->image) }}" alt="Uploaded Image" style="max-width: 100px; max-height: 100px;">
+                                        </td>
+                                        <td><button style="background-color: #cae8ca; color: #fff; border: none;">
+                                                <a href="{{route('view_blogcontent', ['id' => $value->id])}}" class="btn">
+                                                    <i class=""></i>
+                                                    <span>View Blog content</span>
+                                                </a>
+                                            </button></td>
 
                                         <td>
-                                        <a href="{{url('admin/blogsco/edit/'.$value->id)}}" class="btn"><i class="fas fa-edit"></i></a>
+                                            <a href="{{url('admin/blogsco/edit/'.$value->id)}}" class="btn"><i class="fas fa-edit"></i></a>
                                             <a onclick="return confirm('Are you sure you want to delete?')" href="{{url('admin/blogsco/delete/'.$value->id)}}" class="btn"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
@@ -134,7 +169,36 @@
     </div>
     <!-- /.content -->
 </div>
+
+
+
+
+<!-- Your scripts -->
+<!-- ... (previous code) ... -->
+
+<script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        ClassicEditor
+            .create(document.querySelector('#editor'), {
+                ckfinder: {
+                    uploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}"
+                }
+                
+                // Add any other CKEditor configurations as needed
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    });
+</script>
+
+
 @endsection
+
+
+
 
 @section('style')
 <!-- Include jQuery -->

@@ -31,14 +31,14 @@ class BlogController extends Controller
             foreach ($images as $image) {
                 $filename = time() . '_' . str_replace(' ', '_', $image->getClientOriginalName());
                 $image->move(public_path('images'), $filename);
-            
+
                 // Insert the filename into the 'blogimage' table
                 Blogimage::create([
                     'filename' => $filename,
                 ]);
             }
-            
-            
+
+
 
             return response()->json(['message' => 'Images uploaded successfully']);
         }
@@ -60,19 +60,19 @@ class BlogController extends Controller
     {
         try {
             $image = Blogimage::find($id);
-    
+
             if (!$image) {
                 return response()->json(['error' => 'Image not found'], 404);
             }
-    
+
             // Perform the deletion
             $image->delete();
-    
+
             return response()->json(['message' => 'Image deleted successfully']);
         } catch (\Exception $e) {
             // Log the exception for debugging
             Log::error('Exception caught while deleting image: ' . $e->getMessage());
-    
+
             // Return a generic error response
             return response()->json(['error' => 'Error deleting image'], 500);
         }
@@ -83,16 +83,37 @@ class BlogController extends Controller
         if ($request->hasFile('image')) {
             $images = $request->file('image');
 
-                $filename = time() . '_' . str_replace(' ', '_', $images->getClientOriginalName());
-                $images->move(public_path('images'), $filename);
-            
-                // Insert the filename into the 'blogimage' table
-                Gallery::create([
-                    'image' => $filename,
-                ]);
-                return redirect('admin/logo/logo')->with('success', 'content Blog uploaded successfully.');        }
+            $filename = time() . '_' . str_replace(' ', '_', $images->getClientOriginalName());
+            $images->move(public_path('images'), $filename);
+
+            // Insert the filename into the 'blogimage' table
+            Gallery::create([
+                'image' => $filename,
+            ]);
+            return redirect('admin/logo/logo')->with('success', 'content Blog uploaded successfully.');
+        }
 
         return response()->json(['error' => 'No images selected'], 400);
+    }
+    public function upload(Request $request)
+    {
+        // Log the request data
+        Log::info('Request Data:', $request->all());
+
+        $image = $request->file('upload');
+        $imageName = time() . '_' . str_replace(' ', '_', $image->getClientOriginalName());
+
+        // Log the file move result
+        $isMoved = $image->move(public_path('images'), $imageName);
+
+        // Check if the file move was successful and log accordingly
+        if ($isMoved) {
+            Log::info('File Move Success:', ['imageName' => $imageName]);
+        } else {
+            Log::error('File Move Failed:', ['imageName' => $imageName]);
+        }
+        Log::error('File :', ['url' => asset('public/images/' . $imageName)]);
+        return response()->json(['url' => asset('public/images/' . $imageName),'uploaded'=>1]);
     }
     public function blog_add(Request $request)
     {
@@ -110,10 +131,10 @@ class BlogController extends Controller
     {
         $content = Blog::where('id', $id)->first();
         $imageArray = $content->multiimage ? explode(',', $content->multiimage) : [];
-    
+
         return view('admin.blog.viewcontent', compact('content', 'imageArray'));
     }
-    
+
     public function create_content_blog(Request $request)
     {
         // dd($request->all());
@@ -136,16 +157,16 @@ class BlogController extends Controller
                 $request->Image->move(public_path('images'), $imageName);
                 $blog->Image = $imageName;
             }
-            if($request->multiimage){
-                $idArray = explode(',',$request->multiimage);
+            if ($request->multiimage) {
+                $idArray = explode(',', $request->multiimage);
                 $filenames = Blogimage::whereIn('id', $idArray)->pluck('filename');
                 $filenamesString = implode(',', $filenames->toArray());
-                 $blog->multiimage = $filenamesString;
+                $blog->multiimage = $filenamesString;
             }
             // $blog->content_blog = $request->content_blog;
             $blog->save();
-            $delete=$request->multiimage;
-            $idArray = explode(',',$delete);
+            $delete = $request->multiimage;
+            $idArray = explode(',', $delete);
             Blogimage::whereIn('id', $idArray)->delete();
             return redirect('admin/blog/list')->with('success', 'Blog uploaded successfully.');
         } catch (\Exception $e) {
@@ -173,6 +194,7 @@ class BlogController extends Controller
     {
         Blogimage::truncate();
         $data['getRecord'] = Blog::find($id);
+        // dd($data);
         if ($data['getRecord'] && $data['getRecord']->multiimage) {
             $imageArray = explode(',', $data['getRecord']->multiimage);
             foreach ($imageArray as $imageName) {
@@ -204,41 +226,40 @@ class BlogController extends Controller
         return redirect('admin/blog/list')->with('success', 'Blog updated successfully successfully.');
     }
     public function blog_update($id, Request $request)
-{
-    $blog = Blog::find($id);
-    $blog->Tittle = $request->Tittle;
-    $blog->Description = $request->Description;
+    {
+        $blog = Blog::find($id);
+        $blog->Tittle = $request->Tittle;
+        $blog->Description = $request->Description;
 
-    if ($request->hasFile('Image')) {
-        $imageName = time() . '.' . $request->Image->extension();
-        $request->Image->move(public_path('images'), $imageName);
+        if ($request->hasFile('Image') && $request->file('Image')->isValid()) {
+            $imageName = time() . '.' . $request->Image->extension();
+            $request->Image->move(public_path('images'), $imageName);
 
-        $blog->Image = $imageName;
-    }
-    else{
-        $blog->Image =$blog->Image;
-    }
-
-    if ($request->multiimage) {
-        $idArray = explode(',', $request->multiimage);
-        $existingFilenames = Blogimage::whereIn('id', $idArray)->pluck('filename')->toArray();
-
-        $newFilenames = array_diff($idArray, $existingFilenames);
-
-        $blog->multiimage = implode(',', $existingFilenames);
-
-        foreach ($newFilenames as $filename) {
-            $blogImage = new Blogimage;
-            $blogImage->filename = $filename;
-            $blogImage->save();
+            $blog->Image = $imageName;
+        } else {
+            $blog->Image = $blog->Image;
         }
-    } 
 
-    $blog->save();
-    Blogimage::truncate();
+        if ($request->multiimage) {
+            $idArray = explode(',', $request->multiimage);
+            $existingFilenames = Blogimage::whereIn('id', $idArray)->pluck('filename')->toArray();
 
-    return redirect('admin/blog/list')->with('success', 'Blog updated');
-}
+            $newFilenames = array_diff($idArray, $existingFilenames);
+
+            $blog->multiimage = implode(',', $existingFilenames);
+
+            foreach ($newFilenames as $filename) {
+                $blogImage = new Blogimage;
+                $blogImage->filename = $filename;
+                $blogImage->save();
+            }
+        }
+
+        $blog->save();
+        Blogimage::truncate();
+
+        return redirect('admin/blog/list')->with('success', 'Blog updated');
+    }
 
     public function delete($id, Request $request)
     {

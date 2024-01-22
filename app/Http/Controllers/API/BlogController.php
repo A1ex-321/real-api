@@ -9,6 +9,7 @@ use App\Models\Mailstores;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Log;
+use App\Models\blogsco;
 
 
 class BlogController extends Controller
@@ -115,5 +116,48 @@ class BlogController extends Controller
         } catch (\Exception $e) {
             return response()->json(['error' => 'Internal Server Error'], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
+    }
+    public function scoblogs()
+{
+    try {
+        $blogs = blogsco::all();
+
+        // Update image URLs
+        foreach ($blogs as $blog) {
+            $blog->image = url("public/images/{$blog->image}");
+        }
+
+        return response()->json(['blogs' => $blogs]);
+    } catch (\Exception $e) {
+        return response()->json(['error' => 'Internal Server Error'], Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+}
+
+    public function blogsco($id)
+    {
+        try {
+            // Find the blog by ID
+            $blog = blogsco::find($id);
+        
+            if (!$blog) {
+                // Return an error response if the blog is not found
+                return response()->json(['error' => 'Blog not found'], Response::HTTP_NOT_FOUND);
+            }
+        
+            // Add image URLs for each filename in multiimage
+          
+        
+            // Construct the complete response with title, description, and image_urls
+            $response = [
+                'title' => $blog->title,
+                'description' => $blog->description,
+                'image' => asset('public/images/' . $blog->image),                'content' => $blog->content,
+            ];
+        
+            return response()->json(['blog'=>$response]);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Internal Server Error'], Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        
     }
 }
