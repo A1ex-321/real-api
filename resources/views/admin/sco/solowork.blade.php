@@ -12,7 +12,7 @@
         <div class="container-fluid">
             <div class="row mb-0">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Add home</h1>
+                    <h1 class="m-0">Add one work SEO</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -34,13 +34,14 @@
                 <div class="col-md-12">
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">Add Home data <small></small></h3>
+                            <h3 class="card-title">Add one work data <small></small></h3>
                         </div>
                         <div class="container">
-                            <form action="{{ route('create-home') }}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('create-solowork') }}" method="post" enctype="multipart/form-data">
                             @csrf
 
                                 <div class="card-body">
+                                    <!-- Form inputs here -->
                                     <!-- Form inputs here -->
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Meta Title<span style="color:red">*</span></label>
@@ -135,8 +136,8 @@
                                         <td>{{ $value->ogtype }}</td>
 
                                         <td>
-                                        <a href="{{url('admin/home/edit/'.$value->id)}}" class="btn"><i class="fas fa-edit"></i></a>
-                                            <a onclick="return confirm('Are you sure you want to delete?')" href="{{url('admin/home/delete/'.$value->id)}}" class="btn"><i class="fas fa-trash"></i></a>
+                                        <a href="{{url('admin/solowork/edit/'.$value->id)}}" class="btn"><i class="fas fa-edit"></i></a>
+                                            <a onclick="return confirm('Are you sure you want to delete?')" href="{{url('admin/solowork/delete/'.$value->id)}}" class="btn"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach

@@ -39,7 +39,7 @@
                 <div class="col-md-12">
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">Add New Blog <small></small></h3>
+                            <h3 class="card-title">Add New Work <small></small></h3>
                         </div>
                         <form action="{{ route('create-blog') }}" method="post" enctype="multipart/form-data">
                             {{csrf_field()}}

@@ -44,19 +44,37 @@
                                     <!-- Form inputs here -->
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Meta Title<span style="color:red">*</span></label>
-                                        <input type="text" name="metatitle" class="form-control" id="exampleInputEmail1" placeholder="" value="" required>
+                                        <input type="text" name="metatitle" class="form-control" id="exampleInputEmail1" placeholder="" value="" >
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Meta Description<span style="color:red">*</span></label>
-                                        <input type="text" name="metadescription" class="form-control" id="exampleInputEmail1" placeholder="" value="" required>
+                                        <input type="text" name="metadescription" class="form-control" id="exampleInputEmail1" placeholder="" value="" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">OG Title<span style="color:red">*</span></label>
+                                        <input type="text" name="ogtitle" class="form-control" id="exampleInputEmail1" placeholder="" value="" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">OG Description<span style="color:red">*</span></label>
+                                        <input type="text" name="ogdescription" class="form-control" id="exampleInputEmail1" placeholder="" value="" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Og Image<span style="color:red">*</span></label>
+                                        <input type="text" name="ogimage" class="form-control" id="exampleInputEmail1" placeholder="" value="" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">OG URL<span style="color:red">*</span></label>
+                                        <input type="text" name="ogurl" class="form-control" id="exampleInputEmail1" placeholder="" value="" >
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">OG Type<span style="color:red">*</span></label>
+                                        <input type="text" name="ogtype" class="form-control" id="exampleInputEmail1" placeholder="" value="" >
                                     </div>
                                 </div>
                                 <div class="card-footer">
                                     <button type="submit" class="btn btn-info">Submit</button>
                                 </div>
                             </form>
-
-
 
                         </div>
 
@@ -88,9 +106,14 @@
                                 <thead>
                                     <tr>
 
-                                        <th>Id</th>
+                                    <th>Id</th>
                                         <th>Title</th>
                                         <th>Description</th>
+                                        <th>OG Title</th>
+                                        <th>OG Description</th>
+                                        <th>OG Image</th>
+                                        <th>OG Url</th>
+                                        <th>OG Type</th>
                                         <th>Edit & Delete</th>
 
                                     </tr>
@@ -100,9 +123,14 @@
 
                                     @foreach ($getRecord as $value)
                                     <tr>
-                                        <td>{{ $counter++ }}</td>
+                                    <td>{{ $counter++ }}</td>
                                         <td>{{ $value->metatitle }}</td>
                                         <td>{{ $value->metadescription }}</td>
+                                        <td>{{ $value->ogtitle }}</td>
+                                        <td>{{ $value->ogdescription }}</td>
+                                        <td>{{ $value->ogimage }}</td>
+                                        <td>{{ $value->ogurl }}</td>
+                                        <td>{{ $value->ogtype }}</td>
 
                                         <td>
                                         <a href="{{url('admin/about/edit/'.$value->id)}}" class="btn"><i class="fas fa-edit"></i></a>

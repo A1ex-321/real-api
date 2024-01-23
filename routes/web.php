@@ -146,19 +146,43 @@ Route::group(['middleware' => 'admin', 'web'], function () {
     Route::get('admin/service/delete/{id}', [ScoController::class, 'service_delete']);
     Route::get('admin/service/edit/{id}', [ScoController::class, 'service_edit']);
     Route::post('admin/service/edit/{id}', [ScoController::class, 'service_update'])->name('service-update');
-     //   SCO contact
-     Route::get('admin/contact/contactlist', [ScoController::class, 'contactlist'])->name('contact-list');
-     Route::post('admin/contact/addcontact', [ScoController::class, 'create_contact'])->name('create-contact');
-     Route::get('admin/contact/delete/{id}', [ScoController::class, 'contact_delete']);
-     Route::get('admin/contact/edit/{id}', [ScoController::class, 'contact_edit']);
-     Route::post('admin/contact/edit/{id}', [ScoController::class, 'contact_update'])->name('contact-update');
-      //   SCO blog
+    //   SCO contact
+    Route::get('admin/contact/contactlist', [ScoController::class, 'contactlist'])->name('contact-list');
+    Route::post('admin/contact/addcontact', [ScoController::class, 'create_contact'])->name('create-contact');
+    Route::get('admin/contact/delete/{id}', [ScoController::class, 'contact_delete']);
+    Route::get('admin/contact/edit/{id}', [ScoController::class, 'contact_edit']);
+    Route::post('admin/contact/edit/{id}', [ScoController::class, 'contact_update'])->name('contact-update');
+    //   SCO blog
     Route::get('admin/blogsco/bloglist', [ScoController::class, 'bloglist'])->name('blogsco-list');
     Route::post('admin/blogsco/addblog', [ScoController::class, 'create_blogsco'])->name('create-blogsco');
     Route::get('admin/blogsco/delete/{id}', [ScoController::class, 'blogsco_delete']);
     Route::get('admin/blogsco/edit/{id}', [ScoController::class, 'blogsco_edit']);
     Route::post('admin/blogsco/edit/{id}', [ScoController::class, 'blogsco_update'])->name('blogsco-update');
     Route::get('view_blogcontent/{id}', [ScoController::class, 'content_view'])->name('view_blogcontent');
+    //   SCO content blog
+    Route::get('admin/scoblog/scobloglist', [ScoController::class, 'scobloglist'])->name('scoblog-list');
+    Route::post('admin/scoblog/addscoblog', [ScoController::class, 'create_scoblog'])->name('create-scoblog');
+    Route::get('admin/scoblog/delete/{id}', [ScoController::class, 'scoblog_delete']);
+    Route::get('admin/scoblog/edit/{id}', [ScoController::class, 'edit_scoblog']);
+    Route::post('admin/scoblog/edit/{id}', [ScoController::class, 'scoblog_update'])->name('scoblog-update');
+    //   SCO work
+    Route::get('admin/work/worklist', [ScoController::class, 'worklist'])->name('work-list');
+    Route::post('admin/work/addwork', [ScoController::class, 'create_work'])->name('create-work');
+    Route::get('admin/work/delete/{id}', [ScoController::class, 'work_delete']);
+    Route::get('admin/work/edit/{id}', [ScoController::class, 'work_edit']);
+    Route::post('admin/work/edit/{id}', [ScoController::class, 'work_update'])->name('work-update');
+    //SCO work find id page
+    Route::get('admin/solo/solowork', [ScoController::class, 'soloworklist'])->name('solowork-list');
+    Route::post('admin/solo/solowork', [ScoController::class, 'solowork_work'])->name('create-solowork');
+    Route::get('admin/solowork/delete/{id}', [ScoController::class, 'solowork_delete']);
+    Route::get('admin/solowork/edit/{id}', [ScoController::class, 'solowork_edit']);
+    Route::post('admin/solowork/edit/{id}', [ScoController::class, 'solowork_update'])->name('solowork-update');
+    //SCO blog page find id page
+    Route::get('admin/oneblog/onebloglist', [ScoController::class, 'onebloglist'])->name('oneblog-list');
+    Route::post('admin/oneblog/onebloglist', [ScoController::class, 'create_oneblog'])->name('create-oneblog');
+    Route::get('admin/oneblog/delete/{id}', [ScoController::class, 'oneblog_delete']);
+    Route::get('admin/oneblog/edit/{id}', [ScoController::class, 'oneblog_edit']);
+    Route::post('admin/oneblog/edit/{id}', [ScoController::class, 'oneblog_update'])->name('oneblog-update');
 });
 
 

@@ -34,10 +34,10 @@
                 <div class="col-md-12">
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">Edit New about <small></small></h3>
+                            <h3 class="card-title">Edit New work <small></small></h3>
                         </div>
                         <div class="container">
-                            <form action="{{ route('about-update', ['id' => $getRecord->id])}}" method="post" enctype="multipart/form-data">
+                            <form action="{{ route('solowork-update', ['id' => $getRecord->id])}}" method="post" enctype="multipart/form-data">
                             @csrf
 
                                 <div class="card-body">

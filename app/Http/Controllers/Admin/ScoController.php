@@ -18,6 +18,11 @@ use App\Models\Service;
 use App\Models\Scolink;
 use App\Models\home;
 use App\Models\about;
+use App\Models\scoblog;
+use App\Models\work;
+use App\Models\solowork;
+use App\Models\soloblog;
+
 
 use Illuminate\Support\Facades\File;
 
@@ -38,7 +43,7 @@ class ScoController extends Controller
         $link = new Scolink();
         $link->scolink = $request->scolink;
         $link->save();
-        return redirect('admin/sco/scolist')->with('success', ' Added successfully.');
+        return redirect('admin/sco/scolist')->with('success', 'Added successfully.');
     }
     public function link_delete($id, Request $request)
     {
@@ -119,6 +124,11 @@ class ScoController extends Controller
         $data = new about();
         $data->metatitle = $request->metatitle;
         $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogdescription;
+        $data->ogimage = $request->ogimage;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
 
         $data->save();
         return redirect('admin/about/aboutlist')->with('success', ' Added successfully.');
@@ -139,10 +149,15 @@ class ScoController extends Controller
         $data = about::find($id);
         $data->metatitle = $request->metatitle;
         $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogdescription;
+        $data->ogimage = $request->ogimage;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
         $data->save();
         return redirect('admin/about/aboutlist')->with('success', ' updated');
     }
-
+//service
     public function servicelist(Request $request)
     {
         $data['getRecord'] = Service::all();
@@ -155,6 +170,11 @@ class ScoController extends Controller
         $data = new Service();
         $data->metatitle = $request->metatitle;
         $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogdescription;
+        $data->ogimage = $request->ogimage;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
 
         $data->save();
         return redirect('admin/service/servicelist')->with('success', ' Added successfully.');
@@ -175,6 +195,11 @@ class ScoController extends Controller
         $data = Service::find($id);
         $data->metatitle = $request->metatitle;
         $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogdescription;
+        $data->ogimage = $request->ogimage;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
         $data->save();
         return redirect('admin/service/servicelist')->with('success', ' updated');
     }
@@ -191,6 +216,11 @@ class ScoController extends Controller
         $data = new contacts();
         $data->metatitle = $request->metatitle;
         $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogdescription;
+        $data->ogimage = $request->ogimage;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
 
         $data->save();
         return redirect('admin/contact/contactlist')->with('success', ' Added successfully.');
@@ -211,8 +241,199 @@ class ScoController extends Controller
         $data = contacts::find($id);
         $data->metatitle = $request->metatitle;
         $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogdescription;
+        $data->ogimage = $request->ogimage;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
         $data->save();
         return redirect('admin/contact/contactlist')->with('success', ' updated');
+    }
+
+    // scoblog
+    public function scobloglist(Request $request)
+    {
+        $data['getRecord'] = scoblog::all();
+
+        return view('admin.sco.scobloglist', $data);
+    }
+    public function create_scoblog(Request $request)
+    {
+        // dd($request->all());
+        $data = new scoblog();
+        $data->metatitle = $request->metatitle;
+        $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogdescription;
+        $data->ogimage = $request->ogimage;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
+
+        $data->save();
+        return redirect('admin/scoblog/scobloglist')->with('success', ' Added successfully.');
+    }
+    public function scoblog_delete($id, Request $request)
+    {
+        $image = scoblog::find($id);
+        $image->delete();
+        return redirect('admin/scoblog/scobloglist')->with('success', ' Deleted successful');
+    }
+    public function edit_scoblog($id, Request $request)
+    {
+        $data['getRecord'] = scoblog::find($id);
+        return view('admin.sco.edit_scoblog', $data);
+    }
+    public function scoblog_update($id, Request $request)
+    {
+        $data = scoblog::find($id);
+        $data->metatitle = $request->metatitle;
+        $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogdescription;
+        $data->ogimage = $request->ogimage;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
+        $data->save();
+        return redirect('admin/scoblog/scobloglist')->with('success', ' updated');
+    }
+
+    // sco work
+    public function worklist(Request $request)
+    {
+        $data['getRecord'] = work::all();
+
+        return view('admin.sco.worklist', $data);
+    }
+    public function create_work(Request $request)
+    {
+        // dd($request->all());
+        $data = new work();
+        $data->metatitle = $request->metatitle;
+        $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogdescription;
+        $data->ogimage = $request->ogimage;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
+
+        $data->save();
+        return redirect('admin/work/worklist')->with('success', ' Added successfully.');
+    }
+    public function work_delete($id, Request $request)
+    {
+        $image = work::find($id);
+        $image->delete();
+        return redirect('admin/work/worklist')->with('success', ' Deleted successful');
+    }
+    public function work_edit($id, Request $request)
+    {
+        $data['getRecord'] = work::find($id);
+        return view('admin.sco.edit_work', $data);
+    }
+    public function work_update($id, Request $request)
+    {
+        $data = work::find($id);
+        $data->metatitle = $request->metatitle;
+        $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogdescription;
+        $data->ogimage = $request->ogimage;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
+        $data->save();
+        return redirect('admin/work/worklist')->with('success', ' updated');
+    }
+//new work page by id
+    public function soloworklist(Request $request)
+    {
+        $data['getRecord'] = solowork::all();
+
+        return view('admin.sco.solowork', $data);
+    }
+    public function solowork_work(Request $request)
+    {
+        // dd($request->all());
+        $data = new solowork();
+        $data->metatitle = $request->metatitle;
+        $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogdescription;
+        $data->ogimage = $request->ogimage;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
+
+        $data->save();
+        return redirect('admin/solo/solowork')->with('success', ' Added successfully.');
+    }
+    public function solowork_delete($id, Request $request)
+    {
+        $image = solowork::find($id);
+        $image->delete();
+        return redirect('admin/solo/solowork')->with('success', ' Deleted successful');
+    }
+    public function solowork_edit($id, Request $request)
+    {
+        $data['getRecord'] = solowork::find($id);
+        return view('admin.sco.edit_solowork', $data);
+    }
+    public function solowork_update($id, Request $request)
+    {
+        $data = solowork::find($id);
+        $data->metatitle = $request->metatitle;
+        $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogdescription;
+        $data->ogimage = $request->ogimage;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
+        $data->save();
+        return redirect('admin/solo/solowork')->with('success', ' updated');
+    }
+    //find by id blog
+    public function onebloglist(Request $request)
+    {
+        $data['getRecord'] = soloblog::all();
+
+        return view('admin.sco.soloblog', $data);
+    }
+    public function create_oneblog(Request $request)
+    {
+        // dd($request->all());
+        $data = new soloblog();
+        $data->metatitle = $request->metatitle;
+        $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogdescription;
+        $data->ogimage = $request->ogimage;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
+
+        $data->save();
+        return redirect('admin/oneblog/onebloglist')->with('success', ' Added successfully.');
+    }
+    public function oneblog_delete($id, Request $request)
+    {
+        $image = soloblog::find($id);
+        $image->delete();
+        return redirect('admin/oneblog/onebloglist')->with('success', ' Deleted successful');
+    }
+    public function oneblog_edit($id, Request $request)
+    {
+        $data['getRecord'] = soloblog::find($id);
+        return view('admin.sco.edit_soloblog', $data);
+    }
+    public function oneblog_update($id, Request $request)
+    {
+        $data = soloblog::find($id);
+        $data->metatitle = $request->metatitle;
+        $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogdescription;
+        $data->ogimage = $request->ogimage;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
+        $data->save();
+        return redirect('admin/oneblog/onebloglist')->with('success', ' updated');
     }
     // blog
     public function bloglist(Request $request)

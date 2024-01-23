@@ -111,35 +111,6 @@
         oembed.replaceWith(iframe);
     }
 });
-// console.log("uid", oembedContainers)
-// document.addEventListener("DOMContentLoaded", function () {
-//     const blogListContainer1 = document.querySelector('.ckeditor-content');
-//     const content = {!! json_encode($content->content ?? '') !!};
-
-//     // Manually extract YouTube video URLs
-//     const youtubeRegex = /(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/g;
-//     const youtubeMatches = content.matchAll(youtubeRegex);
-
-//     for (const match of youtubeMatches) {
-//         const videoId = match[1];
-//         const youtubeUrl = `https://www.youtube.com/embed/${videoId}`;
-
-//         // Create an iframe element with allow attribute
-//         const iframe = document.createElement('iframe');
-//         iframe.src = youtubeUrl;
-//         iframe.allow = 'autoplay; fullscreen'; // Allow autoplay and fullscreen
-//         iframe.style.width = '700px';
-//         iframe.style.height = '400px'; // You can adjust the height as needed
-
-//         // Append each iframe to the container
-//         blogListContainer1.appendChild(iframe);
-//     }
-
-//     if (!youtubeMatches || youtubeMatches.length === 0) {
-//         // Handle case when no YouTube video URL is found in the content
-//         console.error('No YouTube video URLs found in the content');
-//     }
-// });
 
 
 </script>

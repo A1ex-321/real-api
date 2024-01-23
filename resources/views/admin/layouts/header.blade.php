@@ -145,7 +145,17 @@
             <i class="fa fa-tasks" aria-hidden="true"></i>
 
             <p>
-            Blog
+            work
+            </p>
+          </a>
+        </li> 
+        <li class="nav-item">
+          <a href="{{route('blogsco-list')}}"
+            class="nav-link {{ request()->segment(2) === 'blogsco' ? 'active' : '' }}">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+
+            <p>
+            SEO Blog
             </p>
           </a>
         </li> 
@@ -179,7 +189,7 @@
             </p>
           </a>
         </li> 
-        <!-- <li class="nav-item">
+         <li class="nav-item">
           <a href="{{route('about-list')}}"
             class="nav-link {{ request()->segment(2) === 'about' ? 'active' : '' }}">
             <i class="fa fa-tasks" aria-hidden="true"></i>
@@ -188,8 +198,8 @@
             About As
             </p>
           </a>
-        </li>  -->
-        <!-- <li class="nav-item">
+        </li>  
+         <li class="nav-item">
           <a href="{{route('service-list')}}"
             class="nav-link {{ request()->segment(2) === 'service' ? 'active' : '' }}">
             <i class="fa fa-tasks" aria-hidden="true"></i>
@@ -198,18 +208,9 @@
             Services
             </p>
           </a>
-        </li>  -->
-        <li class="nav-item">
-          <a href="{{route('blogsco-list')}}"
-            class="nav-link {{ request()->segment(2) === 'blogsco' ? 'active' : '' }}">
-            <i class="fa fa-tasks" aria-hidden="true"></i>
-
-            <p>
-            SEO Blog
-            </p>
-          </a>
-        </li> 
-        <!-- <li class="nav-item">
+        </li>  
+     
+         <li class="nav-item">
           <a href="{{route('contact-list')}}"
             class="nav-link {{ request()->segment(2) === 'contact' ? 'active' : '' }}">
             <i class="fa fa-tasks" aria-hidden="true"></i>
@@ -218,7 +219,46 @@
             Contact
             </p>
           </a>
-        </li>  -->
+        </li>  
+        <li class="nav-item">
+          <a href="{{route('work-list')}}"
+            class="nav-link {{ request()->segment(2) === 'work' ? 'active' : '' }}">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+
+            <p>
+            SEO Work
+            </p>
+          </a>
+        </li> 
+        <li class="nav-item">
+          <a href="{{route('scoblog-list')}}"
+            class="nav-link {{ request()->segment(2) === 'scoblog' ? 'active' : '' }}">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+
+            <p>
+            SEO Content Blog
+            </p>
+          </a>
+        </li> 
+                <li class="nav-item">
+          <a href="{{route('oneblog-list')}}"
+            class="nav-link {{ request()->segment(2) === 'oneblog' ? 'active' : '' }}">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+
+            <p>
+            Find work newblog page by id
+            </p>
+          </a>
+        </li> 
+        <li class="nav-item">
+          <a href="{{route('solowork-list')}}"
+            class="nav-link {{ request()->segment(2) === 'solo' ? 'active' : '' }}">
+            <i class="fa fa-tasks" aria-hidden="true"></i>
+            <p>
+           Find SEO scowork page by id
+            </p>
+          </a>
+        </li> 
         <!-- <li class="nav-item">
           <a href="{{route('products.index')}}"
             class="nav-link {{ request()->segment(2) === 'products' ? 'active' : '' }}">

@@ -12,17 +12,17 @@
         <div class="container-fluid">
             <div class="row mb-0">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Add Blog</h1>
+                    <h1 class="m-0">Add Work</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active">Blog</li>
+                        <li class="breadcrumb-item active">Work</li>
 
 
 
                         <a href="{{route('create-blog')}}" class="btn btn-block btn-primary">
-                            Add Blog
+                            Add Work
                         </a>
                     </ol>
                 </div><!-- /.col -->

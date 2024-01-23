@@ -51,13 +51,25 @@ Route::get('/content_blogs/{id}', [BlogController::class, 'content_blog']);
 Route::get('/demo', [BlogController::class, 'demo']);
 Route::get('/blogsimage/{id}', [BlogController::class, 'blogimage']);
 
-// sco
+// sco home
 Route::get('/home', [ScoController::class, 'home']);
 Route::get('/link', [ScoController::class, 'link']);
+//sco about
+Route::get('/about', [ScoController::class, 'about']);
+//sco contact
+Route::get('/contact', [ScoController::class, 'contact']);
+//sco service
+Route::get('/service', [ScoController::class, 'service']);
+//sco service
+Route::get('/work', [ScoController::class, 'work']);
+//sco service
+Route::get('/scoblogcontent', [ScoController::class, 'scoblogcontent']);
 //seo blog
 Route::get('/seoblogs', [BlogController::class, 'scoblogs']);
 Route::get('/blogsco/{id}', [BlogController::class, 'blogsco']);
 
+Route::get('/findoneblog', [ScoController::class, 'findoneblog']);
+Route::get('/findonework', [ScoController::class, 'findonework']);
 
 
 
