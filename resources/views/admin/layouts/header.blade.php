@@ -1,3 +1,39 @@
+
+<style>.nav-item.line-between + .nav-item.line-between {
+    border-top: 1px solid #ccc; /* Change color as needed */
+    margin-top: 10px; /* Adjust margin as needed */
+}
+/* Hide scrollbar for Chrome, Safari, and Opera */
+.sidebar::-webkit-scrollbar {
+    display: none;
+}
+
+/* Hide scrollbar for IE, Edge, and Firefox */
+.sidebar {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+.sidebar {
+    overflow-y: auto;
+    height: 100vh; /* Adjust the height as needed */
+    position: fixed;
+    top: 0;
+}
+
+/* Optional: To add a custom scrollbar style */
+.sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #888;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+}
+
+</style>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
   <!-- Left navbar links -->
   <ul class="navbar-nav">
@@ -56,7 +92,7 @@
   </a> -->
 
   <!-- Sidebar -->
-  <div class="sidebar">
+  <div class="sidebar" style="height: 570px; overflow-y: auto;">
     <!-- Sidebar user panel (optional) -->
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
@@ -69,7 +105,7 @@
     </div>
 
     <!-- SidebarSearch Form -->
-    <div class="form-inline">
+    <div class="form-inline"style="width:95%;">
       <div class="input-group" data-widget="sidebar-search">
         <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
@@ -159,7 +195,7 @@
             </p>
           </a>
         </li> 
-        <li class="nav-item">
+        <li class="nav-item line-between">
           <a href="{{route('blog-logo')}}"
             class="nav-link {{ request()->segment(2) === 'logo' ? 'active' : '' }}">
             <i class="fa fa-tasks" aria-hidden="true"></i>
@@ -169,7 +205,7 @@
             </p>
           </a>
         </li> 
-        <li class="nav-item">
+        <li class="nav-item line-between">
           <a href="{{route('sco-list')}}"
             class="nav-link {{ request()->segment(2) === 'sco' ? 'active' : '' }}">
             <i class="fa fa-tasks" aria-hidden="true"></i>
@@ -226,7 +262,7 @@
             <i class="fa fa-tasks" aria-hidden="true"></i>
 
             <p>
-            SEO Work
+            SEO All Work
             </p>
           </a>
         </li> 
@@ -236,11 +272,11 @@
             <i class="fa fa-tasks" aria-hidden="true"></i>
 
             <p>
-            SEO Content Blog
+            SEO All Blog
             </p>
           </a>
         </li> 
-                <li class="nav-item">
+                <!-- <li class="nav-item">
           <a href="{{route('oneblog-list')}}"
             class="nav-link {{ request()->segment(2) === 'oneblog' ? 'active' : '' }}">
             <i class="fa fa-tasks" aria-hidden="true"></i>
@@ -249,8 +285,8 @@
             Find work newblog page by id
             </p>
           </a>
-        </li> 
-        <li class="nav-item">
+        </li>  -->
+        <!-- <li class="nav-item">
           <a href="{{route('solowork-list')}}"
             class="nav-link {{ request()->segment(2) === 'solo' ? 'active' : '' }}">
             <i class="fa fa-tasks" aria-hidden="true"></i>
@@ -258,7 +294,7 @@
            Find SEO scowork page by id
             </p>
           </a>
-        </li> 
+        </li>  -->
         <!-- <li class="nav-item">
           <a href="{{route('products.index')}}"
             class="nav-link {{ request()->segment(2) === 'products' ? 'active' : '' }}">

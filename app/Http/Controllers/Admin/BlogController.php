@@ -284,4 +284,5 @@ class BlogController extends Controller
         // $data['header_title'] = "Add New Brand";
         return view('admin.blog.demo');
     }
+    
 }

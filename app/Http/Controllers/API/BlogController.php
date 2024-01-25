@@ -26,7 +26,7 @@ class BlogController extends Controller
                 // Assuming the 'Image' field stores the filename
                 $record->Image = asset('public/images/' . $record->Image);
             }
-
+          
             return response()->json(['blogs' => $blogs]);
         } catch (\Exception $e) {
             return response()->json(['error' => 'Internal Server Error'], Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -126,7 +126,9 @@ class BlogController extends Controller
         foreach ($blogs as $blog) {
             $blog->image = url("public/images/{$blog->image}");
         }
-
+        foreach ($blogs as $blog) {
+            $blog->ogimage = url("public/images/{$blog->ogimage}");
+        }
         return response()->json(['blogs' => $blogs]);
     } catch (\Exception $e) {
         return response()->json(['error' => 'Internal Server Error'], Response::HTTP_INTERNAL_SERVER_ERROR);
@@ -137,7 +139,7 @@ class BlogController extends Controller
     {
         try {
             // Find the blog by ID
-            $blog = blogsco::find($id);
+            $blog = blogsco::where('slug', $id)->first();
         
             if (!$blog) {
                 // Return an error response if the blog is not found
@@ -152,6 +154,14 @@ class BlogController extends Controller
                 'title' => $blog->title,
                 'description' => $blog->description,
                 'image' => asset('public/images/' . $blog->image),                'content' => $blog->content,
+                'slug'=>$blog->slug,
+                'metatitle'=>$blog->metatitle,
+                'metadescription'=>$blog->metadescription,
+                'ogtitle'=>$blog->ogtitle,
+                'ogdescription'=>$blog->ogdescription,
+                'ogimage'=>asset('public/images/' . $blog->ogimage),
+                'ogurl'=>$blog->ogurl,
+                'ogtype'=>$blog->ogtype,
             ];
         
             return response()->json(['blog'=>$response]);

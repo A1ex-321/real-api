@@ -158,6 +158,8 @@ Route::group(['middleware' => 'admin', 'web'], function () {
     Route::get('admin/blogsco/delete/{id}', [ScoController::class, 'blogsco_delete']);
     Route::get('admin/blogsco/edit/{id}', [ScoController::class, 'blogsco_edit']);
     Route::post('admin/blogsco/edit/{id}', [ScoController::class, 'blogsco_update'])->name('blogsco-update');
+
+    Route::post('admin/sco/edit/{id}', [ScoController::class, 'sco_update'])->name('sco-update');
     Route::get('view_blogcontent/{id}', [ScoController::class, 'content_view'])->name('view_blogcontent');
     //   SCO content blog
     Route::get('admin/scoblog/scobloglist', [ScoController::class, 'scobloglist'])->name('scoblog-list');
@@ -183,6 +185,8 @@ Route::group(['middleware' => 'admin', 'web'], function () {
     Route::get('admin/oneblog/delete/{id}', [ScoController::class, 'oneblog_delete']);
     Route::get('admin/oneblog/edit/{id}', [ScoController::class, 'oneblog_edit']);
     Route::post('admin/oneblog/edit/{id}', [ScoController::class, 'oneblog_update'])->name('oneblog-update');
+    Route::post('/check-slug-availability', [ScoController::class, 'checkSlugAvailability']);
+
 });
 
 

@@ -9,8 +9,13 @@
 </style>
 
 <head>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <!-- ... (other scripts) ... -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>Add Blog</title>
 
     <!-- Include jQuery -->
@@ -58,22 +63,29 @@
                                 <div class="card-body">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Title<span style="color:red">*</span></label>
-                                        <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="Title" value="" required>
+                                        <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="Title" value="{{ old('title') }}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Slug<span style="color:red">*</span></label>
+                                        <input type="text" name="slug" class="form-control" id="exampleInputEmail1" placeholder="slug" value="{{ old('slug') }}" required>
+                                        @error('slug')
+                                        <p style="color: red;">{{ $message }}</p>
+                                        @enderror
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Description<span style="color:red"></span></label>
-                                        <textarea name="description" class="form-control" id="exampleInputEmail1" placeholder="Description" style="width: 100%; height: 100px;"></textarea>
+                                        <textarea name="description" class="form-control" id="exampleInputEmail1" placeholder="Description" style="width: 100%; height: 100px;" >{{ old('description') }}</textarea>
 
 
                                     </div>
                                     <div class="form-group">
                                         <label for="editor">Content</label>
-                                        <textarea name="content" id="editor" style="height: 250px; visibility: hidden;"></textarea>
+                                        <textarea name="content" id="editor" style="height: 250px; visibility: hidden;">{{ old('content') }}</textarea>
                                     </div>
 
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Thumb Image<span style="color:red">*</span></label>
-                                        <input type="file" name="image" class="form-control" id="exampleInputEmail1" placeholder="Image" value="" required>
+                                        <input type="file" name="image" class="form-control" id="exampleInputEmail1" placeholder="Image"  value="{{ old('image') }}"required>
                                     </div>
                                     <!-- /.card-body -->
                                     <div class="card-footer">
@@ -175,17 +187,20 @@
 
 <!-- Your scripts -->
 <!-- ... (previous code) ... -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- ... (other scripts) ... -->
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
 <script src="https://cdn.ckeditor.com/ckeditor5/40.2.0/classic/ckeditor.js"></script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", function() {
         ClassicEditor
             .create(document.querySelector('#editor'), {
                 ckfinder: {
                     uploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}"
                 }
-                
+
                 // Add any other CKEditor configurations as needed
             })
             .catch(error => {
@@ -193,7 +208,38 @@
             });
     });
 </script>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<meta name="csrf-token" content="{{ csrf_token() }}">
 
+<script>
+    // Function to check the availability of the slug
+    function checkSlugAvailability() {
+        const slugInput = $('input[name="slug"]');
+        const slugValue = slugInput.val();
+
+        // Make an AJAX request to your Laravel route
+        $.ajax({
+            url: '/check-slug-availability',
+            method: 'POST',
+            data: {
+                _token: '{{ csrf_token() }}', // Ensure proper syntax
+                slug: slugValue
+            },
+            success: function(response) {
+                const messageElement = $('#slugAvailabilityMessage');
+
+                if (response.available) {} else {
+                    messageElement.text('Slug already exists. Please choose another one.');
+                }
+            },
+            error: function(error) {
+                console.error('Error checking slug availability:', error);
+            }
+        });
+    }
+    // Attach the function to the 'change' event of the slug input
+    $('input[name="slug"]').on('change', checkSlugAvailability);
+</script>
 
 @endsection
 

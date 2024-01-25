@@ -22,6 +22,7 @@ use App\Models\scoblog;
 use App\Models\work;
 use App\Models\solowork;
 use App\Models\soloblog;
+use Illuminate\Support\Facades\Validator;
 
 
 use Illuminate\Support\Facades\File;
@@ -445,6 +446,17 @@ class ScoController extends Controller
     public function create_blogsco(Request $request)
     {
         //  dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'slug' => 'required|unique:blogsco,slug',
+            // Add other validation rules as needed
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
+        
         $data = new blogsco();
         $data->title = $request->title;
         $data->description = $request->description;
@@ -456,7 +468,10 @@ class ScoController extends Controller
             $images->move(public_path('images'), $filename);                   
         }
         $data->image = $filename;
-
+        $data->metatitle=$request->title;
+        $data->metadescription=$request->description;
+        $data->ogimage=$filename;
+        $data->slug=$request->slug;
 
         $data->save();
         return redirect('admin/blogsco/bloglist')->with('success', ' Added successfully.');
@@ -474,6 +489,17 @@ class ScoController extends Controller
     }
     public function blogsco_update($id, Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'slug' => 'required|unique:blogsco,slug,' . $id,
+            // Add other validation rules as needed
+        ]);
+    
+        if ($validator->fails()) {
+            return redirect()->back()
+                        ->withErrors($validator)
+                        ->withInput();
+        }
         $data = blogsco::find($id);
         $data->title = $request->title;
         $data->description = $request->description;
@@ -488,9 +514,45 @@ class ScoController extends Controller
         else{
             $data->image = $data->image; 
         }
+        $data->slug=$request->slug;
         $data->save();
         return redirect('admin/blogsco/bloglist')->with('success', ' updated');
     }
+    public function sco_update($id, Request $request)
+    {
+        $data = blogsco::find($id);
+        $data->metatitle = $request->metatitle;
+        $data->metadescription = $request->metadescription;
+        $data->ogtitle = $request->ogtitle;
+        $data->ogdescription = $request->ogtitle;
+        $data->ogurl = $request->ogurl;
+        $data->ogtype = $request->ogtype;
+
+        if ($request->hasFile('ogimage')) {
+            $images = $request->file('ogimage');
+
+            $filename = time() . '_' . str_replace(' ', '_', $images->getClientOriginalName());
+            $images->move(public_path('images'), $filename);    
+            $data->ogimage = $filename;               
+        }
+        else{
+            $data->ogimage = $data->ogimage; 
+        }
+        $data->save();
+        return redirect('admin/blogsco/bloglist')->with('success', ' updated');
+    }
+    public function checkSlugAvailability(Request $request)
+    {
+        $submittedSlug = $request->input('slug');
+
+        // Check if the submitted slug already exists in the database
+        $count = blogsco::where('slug', $submittedSlug)->count();
+
+        // Respond with JSON indicating slug availability
+        return response()->json(['available' => $count == 0]);
+    }
+
+
     public function content_view(Request $request, $id)
     {
         $content = blogsco::where('id', $id)->first();
@@ -498,6 +560,7 @@ class ScoController extends Controller
 
         return view('admin.sco.view_blogcontent', compact('content'));
     }
+    
 }
 
 
