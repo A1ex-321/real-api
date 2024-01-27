@@ -186,6 +186,8 @@ Route::group(['middleware' => 'admin', 'web'], function () {
     Route::get('admin/oneblog/edit/{id}', [ScoController::class, 'oneblog_edit']);
     Route::post('admin/oneblog/edit/{id}', [ScoController::class, 'oneblog_update'])->name('oneblog-update');
     Route::post('/check-slug-availability', [ScoController::class, 'checkSlugAvailability']);
+    Route::post('/validate-slug', 'ScoController@validateSlug')->name('validate-slug');
+
 
 });
 

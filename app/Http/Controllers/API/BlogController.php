@@ -139,7 +139,7 @@ class BlogController extends Controller
     {
         try {
             // Find the blog by ID
-            $blog = blogsco::where('slug', $id)->first();
+            $blog = blogsco::where('id', $id)->first();
         
             if (!$blog) {
                 // Return an error response if the blog is not found

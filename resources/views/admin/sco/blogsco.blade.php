@@ -4,7 +4,7 @@
 @section('content')
 <style type="text/css">
     .ck-editor__editable_inline {
-        height: 250Px;
+        height: 470Px;
     }
 </style>
 
@@ -65,13 +65,7 @@
                                         <label for="exampleInputEmail1">Title<span style="color:red">*</span></label>
                                         <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="Title" value="{{ old('title') }}" required>
                                     </div>
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1">Slug<span style="color:red">*</span></label>
-                                        <input type="text" name="slug" class="form-control" id="exampleInputEmail1" placeholder="slug" value="{{ old('slug') }}" required>
-                                        @error('slug')
-                                        <p style="color: red;">{{ $message }}</p>
-                                        @enderror
-                                    </div>
+                                  
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Description<span style="color:red"></span></label>
                                         <textarea name="description" class="form-control" id="exampleInputEmail1" placeholder="Description" style="width: 100%; height: 100px;" >{{ old('description') }}</textarea>
