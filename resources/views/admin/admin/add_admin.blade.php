@@ -56,13 +56,20 @@
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Password</label>
-                    <input type="text" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password"  >
+                    <input type="text" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
                   </div>
                   <div class="form-group">
                     <label for="exampleInputPassword1">Status</label>
-                   <select name="status" class="form-control">
+                   <select name="status" class="form-control" required>
                     <option value="0" {{(old('status'==0)?'selected':'')}}>Active</option>
-                    <option value="1" {{(old('status'==1)?'selected':'')}}>Inactive</option>
+                    <option value="1" {{(old('status'==1)?'selected':'')}}> Inactive</option>
+                   </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">Status</label>
+                   <select name="role" class="form-control" required>
+                    <option value="0" {{(old('status'==0)?'selected':'')}}>Admin</option>
+                    <option value="1" {{(old('status'==1)?'selected':'')}}>super Admin</option>
                    </select>
                   </div>
 

@@ -44,13 +44,13 @@ class ScoController extends Controller
         $link = new Scolink();
         $link->scolink = $request->scolink;
         $link->save();
-        return redirect('admin/sco/scolist')->with('success', 'Added successfully.');
+        return redirect('admin/seo/seolist')->with('success', 'Added successfully.');
     }
     public function link_delete($id, Request $request)
     {
         $image = Scolink::find($id);
         $image->delete();
-        return redirect('admin/sco/scolist')->with('success', ' Deleted successful');
+        return redirect('admin/seo/seolist')->with('success', ' Deleted successful');
     }
     public function link_edit($id, Request $request)
     {
@@ -63,7 +63,7 @@ class ScoController extends Controller
         $blog->scolink = $request->scolink;
         $blog->save();
 
-        return redirect('admin/sco/scolist')->with('success', 'link updated');
+        return redirect('admin/seo/seolist')->with('success', 'link updated');
     }
     public function homelist(Request $request)
     {
@@ -468,13 +468,13 @@ class ScoController extends Controller
             $data->slug = $request->title;
         }
         $data->save();
-        return redirect('admin/blogsco/bloglist')->with('success', ' Added successfully.');
+        return redirect('admin/blogseo/bloglist')->with('success', ' Added successfully.');
     }
     public function blogsco_delete($id, Request $request)
     {
         $image = blogsco::find($id);
         $image->delete();
-        return redirect('admin/blogsco/bloglist')->with('success', ' Deleted successful');
+        return redirect('admin/blogseo/bloglist')->with('success', ' Deleted successful');
     }
     public function blogsco_edit($id, Request $request)
     {
@@ -499,7 +499,7 @@ class ScoController extends Controller
             $data->image = $data->image;
         }
         $data->save();
-        return redirect('admin/blogsco/bloglist')->with('success', ' updated');
+        return redirect('admin/blogseo/bloglist')->with('success', ' updated');
     }
     public function sco_update($id, Request $request)
     {
@@ -532,7 +532,7 @@ class ScoController extends Controller
         }
         $data->slug = $request->slug;
         $data->save();
-        return redirect('admin/blogsco/bloglist')->with('success', ' updated');
+        return redirect('admin/blogseo/bloglist')->with('success', ' updated');
     }
     public function checkSlugAvailability(Request $request)
     {

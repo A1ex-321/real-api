@@ -42,7 +42,7 @@ use App\Http\Controllers\Admin\ScoController;
 */
 
 Route::group(['middleware' => 'admin', 'web'], function () {
-    //  Route::get('admin/brand/mail1', function () {Mail::to('alexalphons82@gmail.com')->send(new SendMail($data));});
+    //  Route::get('admin/brand/mail1', function () {Mail::to('@gmail.com')->send(new SendMail($data));});
 
     Route::get('admin/dashboard', [DashboardController::class, 'dashboard']);
 
@@ -123,9 +123,9 @@ Route::group(['middleware' => 'admin', 'web'], function () {
     //   Route::delete('delete-image/{filename}', [BlogController::class, 'deleteImage'])->name('delete.image');
     Route::delete('/delete-image/{id}', [BlogController::class, 'deleteimage']);
     //   SCO link
-    Route::get('admin/sco/scolist', [ScoController::class, 'scolist'])->name('sco-list');
-    Route::post('admin/sco/addlink', [ScoController::class, 'create_link'])->name('create-link');
-    Route::get('admin/sco/delete/{id}', [ScoController::class, 'link_delete']);
+    Route::get('admin/seo/seolist', [ScoController::class, 'scolist'])->name('sco-list');
+    Route::post('admin/seo/addlink', [ScoController::class, 'create_link'])->name('create-link');
+    Route::get('admin/seo/delete/{id}', [ScoController::class, 'link_delete']);
     Route::get('admin/link/edit/{id}', [ScoController::class, 'link_edit']);
     Route::post('admin/link/edit/{id}', [ScoController::class, 'link_update'])->name('update-link');
     //   SCO home
@@ -153,11 +153,11 @@ Route::group(['middleware' => 'admin', 'web'], function () {
     Route::get('admin/contact/edit/{id}', [ScoController::class, 'contact_edit']);
     Route::post('admin/contact/edit/{id}', [ScoController::class, 'contact_update'])->name('contact-update');
     //   SCO blog
-    Route::get('admin/blogsco/bloglist', [ScoController::class, 'bloglist'])->name('blogsco-list');
-    Route::post('admin/blogsco/addblog', [ScoController::class, 'create_blogsco'])->name('create-blogsco');
-    Route::get('admin/blogsco/delete/{id}', [ScoController::class, 'blogsco_delete']);
-    Route::get('admin/blogsco/edit/{id}', [ScoController::class, 'blogsco_edit']);
-    Route::post('admin/blogsco/edit/{id}', [ScoController::class, 'blogsco_update'])->name('blogsco-update');
+    Route::get('admin/blogseo/bloglist', [ScoController::class, 'bloglist'])->name('blogsco-list');
+    Route::post('admin/blogseo/addblog', [ScoController::class, 'create_blogsco'])->name('create-blogsco');
+    Route::get('admin/blogseo/delete/{id}', [ScoController::class, 'blogsco_delete']);
+    Route::get('admin/blogseo/edit/{id}', [ScoController::class, 'blogsco_edit']);
+    Route::post('admin/blogseo/edit/{id}', [ScoController::class, 'blogsco_update'])->name('blogsco-update');
 
     Route::post('admin/sco/edit/{id}', [ScoController::class, 'sco_update'])->name('sco-update');
     Route::get('view_blogcontent/{id}', [ScoController::class, 'content_view'])->name('view_blogcontent');

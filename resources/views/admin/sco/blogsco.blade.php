@@ -146,8 +146,8 @@
                                             </button></td>
 
                                         <td>
-                                            <a href="{{url('admin/blogsco/edit/'.$value->id)}}" class="btn"><i class="fas fa-edit"></i></a>
-                                            <a onclick="return confirm('Are you sure you want to delete?')" href="{{url('admin/blogsco/delete/'.$value->id)}}" class="btn"><i class="fas fa-trash"></i></a>
+                                            <a href="{{url('admin/blogseo/edit/'.$value->id)}}" class="btn"><i class="fas fa-edit"></i></a>
+                                            <a onclick="return confirm('Are you sure you want to delete?')" href="{{url('admin/blogseo/delete/'.$value->id)}}" class="btn"><i class="fas fa-trash"></i></a>
                                         </td>
                                     </tr>
                                     @endforeach

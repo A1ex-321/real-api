@@ -100,7 +100,9 @@
           alt="User Image">
       </div>
       <div class="info">
-        <a href="#" class="d-block">Blogger</a>
+      @auth
+        <a href="#" class="d-block">{{ auth()->user()->name }}</a>
+    @endauth
       </div>
     </div>
 
@@ -134,16 +136,21 @@
           </a>
 
         </li> -->
-        <!-- <li class="nav-item">
+        @auth
+        @if(auth()->user()->role == 1)
+        <li class="nav-item">
           <a href="{{url('/admin/admin/list')}}"
             class="nav-link {{ request()->segment(2) === 'admin' ? 'active' : '' }}">
-            <i class="nav-icon fas fa-th"></i>
+            <i class="fa fa-tasks"></i>
             <p>
               Users
-
             </p>
           </a>
-        </li> -->
+        </li> 
+        @endif
+        @endauth
+      
+
         <li class="nav-item">
           <a href="{{url('/admin/maillist')}}"
             class="nav-link {{ request()->segment(2) === 'maillist' ? 'active' : '' }}">
@@ -155,6 +162,7 @@
             </p>
           </a>
         </li>
+      
         <!-- <li class="nav-item">
           <a href="{{route('franchiselist')}}"
             class="nav-link {{ request()->segment(2) === 'franchiselist' ? 'active' : '' }}">
@@ -185,9 +193,11 @@
             </p>
           </a>
         </li> 
+        @auth
+        @if(auth()->user()->role == 1)
         <li class="nav-item">
           <a href="{{route('blogsco-list')}}"
-            class="nav-link {{ request()->segment(2) === 'blogsco' ? 'active' : '' }}">
+            class="nav-link {{ request()->segment(2) === 'blogseo' ? 'active' : '' }}">
             <i class="fa fa-tasks" aria-hidden="true"></i>
 
             <p>
@@ -195,6 +205,10 @@
             </p>
           </a>
         </li> 
+        @endif
+        @endauth
+        @auth
+        @if(auth()->user()->role == 1)
         <li class="nav-item line-between">
           <a href="{{route('blog-logo')}}"
             class="nav-link {{ request()->segment(2) === 'logo' ? 'active' : '' }}">
@@ -205,6 +219,10 @@
             </p>
           </a>
         </li> 
+        @endif
+        @endauth
+        @auth
+        @if(auth()->user()->role == 1)
         <li class="nav-item line-between">
           <a href="{{route('sco-list')}}"
             class="nav-link {{ request()->segment(2) === 'sco' ? 'active' : '' }}">
@@ -215,6 +233,10 @@
             </p>
           </a>
         </li> 
+        @endif
+        @endauth
+        @auth
+        @if(auth()->user()->role == 1)
         <li class="nav-item">
           <a href="{{route('home-list')}}"
             class="nav-link {{ request()->segment(2) === 'home' ? 'active' : '' }}">
@@ -225,6 +247,10 @@
             </p>
           </a>
         </li> 
+        @endif
+        @endauth
+        @auth
+        @if(auth()->user()->role == 1)
          <li class="nav-item">
           <a href="{{route('about-list')}}"
             class="nav-link {{ request()->segment(2) === 'about' ? 'active' : '' }}">
@@ -235,6 +261,10 @@
             </p>
           </a>
         </li>  
+        @endif
+        @endauth
+        @auth
+        @if(auth()->user()->role == 1)
          <li class="nav-item">
           <a href="{{route('service-list')}}"
             class="nav-link {{ request()->segment(2) === 'service' ? 'active' : '' }}">
@@ -245,7 +275,10 @@
             </p>
           </a>
         </li>  
-     
+        @endif
+        @endauth
+        @auth
+        @if(auth()->user()->role == 1)
          <li class="nav-item">
           <a href="{{route('contact-list')}}"
             class="nav-link {{ request()->segment(2) === 'contact' ? 'active' : '' }}">
@@ -256,6 +289,10 @@
             </p>
           </a>
         </li>  
+        @endif
+        @endauth
+        @auth
+        @if(auth()->user()->role == 1)
         <li class="nav-item">
           <a href="{{route('work-list')}}"
             class="nav-link {{ request()->segment(2) === 'work' ? 'active' : '' }}">
@@ -266,6 +303,10 @@
             </p>
           </a>
         </li> 
+        @endif
+        @endauth
+        @auth
+        @if(auth()->user()->role == 1)
         <li class="nav-item">
           <a href="{{route('scoblog-list')}}"
             class="nav-link {{ request()->segment(2) === 'scoblog' ? 'active' : '' }}">
@@ -276,6 +317,8 @@
             </p>
           </a>
         </li> 
+        @endif
+        @endauth
                 <!-- <li class="nav-item">
           <a href="{{route('oneblog-list')}}"
             class="nav-link {{ request()->segment(2) === 'oneblog' ? 'active' : '' }}">

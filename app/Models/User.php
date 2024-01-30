@@ -46,7 +46,7 @@ class User extends Authenticatable
     public static function getAdmin()
 {
     return User::select('users.*')
-        ->where('is_admin', '=', 1) // Use a single equals sign for comparison
+ // Use a single equals sign for comparison
         ->where('is_delete', '=', 0) // Use a single equals sign for comparison
         ->orderBy('id', 'desc')
         ->get();

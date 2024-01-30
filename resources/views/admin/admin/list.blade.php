@@ -54,6 +54,7 @@
                     <th>Name</th>
                     <th>Email</th>
                     <th>Status</th>
+                    <th>Role</th>
                     <th>Action</th>
 
                   </tr>
@@ -68,6 +69,7 @@
                     <td>{{$value->name}} </td>
                     <td>{{$value->email}} </td>
                     <td>{{$value->status==0 ? 'Active' : 'Inactive'}} </td>
+                    <td>{{$value->role==0 ? 'Admin' : 'Super Admin'}} </td>
 
 
                     <td >
