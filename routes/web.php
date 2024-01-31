@@ -197,14 +197,35 @@ Route::post('admin', [AuthController::class, 'auth_login_admin']);
 Route::get('admin/logout', [AuthController::class, 'logout_admin']);
 
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('services', [PageController::class, 'services'])->name('services');
-Route::get('about', [PageController::class, 'about'])->name('about');
-Route::get('contact', [PageController::class, 'contact'])->name('contact');
-Route::get('cart-items', [PageController::class, 'cart'])->name('cart-items');
-Route::get('/product/{productId}', [PageController::class, 'productDetails'])->name('product-details');
+// Route::get('/', [HomeController::class, 'index'])->name('home');
+// Route::get('services', [PageController::class, 'services'])->name('services');
+// Route::get('about', [PageController::class, 'about'])->name('about');
+// Route::get('contact', [PageController::class, 'contact'])->name('contact');
+// Route::get('cart-items', [PageController::class, 'cart'])->name('cart-items');
+// Route::get('/product/{productId}', [PageController::class, 'productDetails'])->name('product-details');
 
 //terms and conditions
+Route::get('/', function () {
+    return view('main.index');
+});
+Route::get('/about', function () {
+    return view('main.about');
+});
+Route::get('/contact', function () {
+    return view('main.contact');
+});
+Route::get('/house', function () {
+    return view('main.house');
+});
+Route::get('/land', function () {
+    return view('main.land');
+});
+Route::get('/singleland', function () {
+    return view('main.singleland');
+});
+Route::get('/singlelandrent', function () {
+    return view('main.singlelandrent');
+});
 Route::get('refund-policy', [PageController::class, 'refundPolicy'])->name('refund-policy');
 Route::get('terms', [PageController::class, 'terms'])->name('terms');
 Route::get('privacy', [PageController::class, 'privacy'])->name('privacy');
