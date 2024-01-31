@@ -229,7 +229,7 @@
             <i class="fa fa-tasks" aria-hidden="true"></i>
 
             <p>
-            Sco link
+            SEO link
             </p>
           </a>
         </li> 

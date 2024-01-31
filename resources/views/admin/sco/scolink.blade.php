@@ -43,7 +43,7 @@
                                 <div class="card-body">
                                     <!-- Form inputs here -->
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Sco link<span style="color:red">*(**INCLUDE CONTENT ONLY.DONT PUT FULL LINK**)</span></label>
+                                        <label for="exampleInputEmail1">SEO link<span style="color:red">*(**INCLUDE CONTENT ONLY.DONT PUT FULL LINK**)Google</span></label>
                                         <input type="text" name="scolink" class="form-control" id="exampleInputEmail1" placeholder="" value="" required>
                                     </div>
                                 </div>
