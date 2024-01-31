@@ -70,6 +70,7 @@ Route::get('/blogsco/{id}', [BlogController::class, 'blogsco']);
 
 Route::get('/findoneblog', [ScoController::class, 'findoneblog']);
 Route::get('/findonework', [ScoController::class, 'findonework']);
+Route::get('/findonework1', [ScoController::class, 'findonework']);
 
 
 
