@@ -19,7 +19,16 @@
 .main-menu > ul > li:hover {
     background-color: #f0f0f0;  /* Adjust the background color as needed */
 }
-
+.single-propertiy:hover img {
+    transform: scale(1.1); /* Increase the size on hover */
+    transition: transform 0.3s ease-in-out; /* Add a smooth transition effect */
+    
+}
+/* Add this CSS to your stylesheet or within a style tag in your HTML */
+.single-propertiy:hover h4 a {
+    color: #ff6600; /* Change the color on hover */
+    transition: color 0.3s ease-in-out; /* Add a smooth transition effect */
+}
 
 </style>
 <header class="header-wrapper section">

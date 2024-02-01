@@ -146,11 +146,18 @@ class BlogController extends Controller
     }
     public function create_blog(Request $request)
     {
-        // dd($request->all());
+            // dd($request->all());
         try {
             $blog = new Blog;
             $blog->Tittle = $request->Tittle;
             $blog->Description = $request->Description;
+            $blog->price = $request->price;
+            $blog->address = $request->address;
+            $blog->amenities = $request->amenities;
+            $blog->condition = $request->condition;
+            $blog->type = $request->type;
+
+
 
             if ($request->hasFile('Image')) {
                 $imageName = time() . '.' . $request->Image->extension();
@@ -168,10 +175,10 @@ class BlogController extends Controller
             $delete = $request->multiimage;
             $idArray = explode(',', $delete);
             Blogimage::whereIn('id', $idArray)->delete();
-            return redirect('admin/blog/list')->with('success', 'Blog uploaded successfully.');
+            return redirect('admin/sale/list')->with('success', 'uploaded successfully.');
         } catch (\Exception $e) {
             // Handle the exception (log or display an error message)
-            return redirect()->back()->with('error', 'An error occurred while uploading the blog.');
+            return redirect('admin/sale/list')->with('success', 'dont uploaded successfully.');
         }
     }
 
@@ -179,8 +186,8 @@ class BlogController extends Controller
     public function list(Request $request)
     {
         $data['getRecord'] = Blog::all();
-        $data['getRecordcontent'] = Contentblog::all();
-        $data['header_title'] = "Category List";
+        // $data['getRecordcontent'] = Contentblog::all();
+        $data['header_title'] = " List";
 
         return view('admin.blog.list', $data);
     }
@@ -227,9 +234,15 @@ class BlogController extends Controller
     }
     public function blog_update($id, Request $request)
     {
+        //    dd($request->all());
         $blog = Blog::find($id);
         $blog->Tittle = $request->Tittle;
         $blog->Description = $request->Description;
+        $blog->price = $request->price;
+        $blog->address = $request->address;
+        $blog->amenities = $request->amenities;
+        $blog->condition = $request->condition;
+        $blog->type = $request->type;
 
         if ($request->hasFile('Image') && $request->file('Image')->isValid()) {
             $imageName = time() . '.' . $request->Image->extension();
@@ -258,14 +271,14 @@ class BlogController extends Controller
         $blog->save();
         Blogimage::truncate();
 
-        return redirect('admin/blog/list')->with('success', 'Blog updated');
+        return redirect('admin/sale/list')->with('success', ' updated');
     }
 
     public function delete($id, Request $request)
     {
         $brand = Blog::find($id);
         $brand->delete();
-        return redirect()->back()->with('success', 'blog Successfully Deleted');
+        return redirect()->back()->with('success', ' Successfully Deleted');
     }
     public function delete_blog($id, Request $request)
     {

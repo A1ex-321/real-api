@@ -23,7 +23,7 @@ use App\Http\Controllers\Admin\FranchiseController;
 use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\DemoController;
 use App\Http\Controllers\Admin\ScoController;
-
+use App\Http\Controllers\real\EstateController;
 
 // use App\Http\Controllers\Admin\Website;
 // use App\Http\Controllers\web\Website;
@@ -90,6 +90,8 @@ Route::group(['middleware' => 'admin', 'web'], function () {
     Route::get('admin/blog/list', [BlogController::class, 'list'])->name('blog-list');
     Route::get('admin/logo/logo', [BlogController::class, 'logo'])->name('blog-logo');
 
+
+
     Route::get('admin/addblog/add', [BlogController::class, 'blog_add'])->name('add-blog');
     Route::post('admin/addblog/add', [BlogController::class, 'create_blog'])->name('create-blog');
     Route::post('admin/addlogo/logo', [BlogController::class, 'create_logo'])->name('create-logo');
@@ -97,6 +99,7 @@ Route::group(['middleware' => 'admin', 'web'], function () {
     Route::get('admin/brand/delete/{id}', [BlogController::class, 'delete'])->name('delete-brand');
     Route::get('admin/blog/edit/{id}', [BlogController::class, 'blog_edit']);
     Route::post('admin/blog/edit/{id}', [BlogController::class, 'blog_update'])->name('update-brand');
+
     Route::get('add-blogcontent/{id}', [BlogController::class, 'content_add'])->name('add-blogcontent');
     Route::post('admin/addcontentblog/add', [BlogController::class, 'create_content_blog'])->name('create-content-blog');
     Route::get('view-blogcontent/{id}', [BlogController::class, 'content_view'])->name('view-blogcontent');
@@ -187,8 +190,12 @@ Route::group(['middleware' => 'admin', 'web'], function () {
     Route::post('admin/oneblog/edit/{id}', [ScoController::class, 'oneblog_update'])->name('oneblog-update');
     Route::post('/check-slug-availability', [ScoController::class, 'checkSlugAvailability']);
     Route::post('/validate-slug', 'ScoController@validateSlug')->name('validate-slug');
-
-
+//to new
+    Route::get('admin/sale/list', [BlogController::class, 'list'])->name('blog-list');
+    Route::get('admin/sale/add', [BlogController::class, 'blog_add'])->name('create-blog');
+    Route::post('admin/sale/add', [BlogController::class, 'create_blog'])->name('create-sale');
+    Route::get('admin/sale/edit/{id}', [BlogController::class, 'blog_edit']);
+    Route::post('admin/sale/edit/{id}', [BlogController::class, 'blog_update'])->name('update-brand');
 });
 
 
@@ -217,15 +224,14 @@ Route::get('/contact', function () {
 Route::get('/house', function () {
     return view('main.house');
 });
-Route::get('/land', function () {
-    return view('main.land');
-});
-Route::get('/singleland', function () {
-    return view('main.singleland');
-});
-Route::get('/singlelandrent', function () {
-    return view('main.singlelandrent');
-});
+Route::get('/land', [EstateController::class, 'land']);
+Route::get('/singlelandrent/{id}', [EstateController::class, 'singlelandrent']);
+Route::get('/singlelandsale/{id}', [EstateController::class, 'singlelandsale']);
+
+// Route::get('/singleland', function () {
+//     return view('main.singleland');
+// });
+
 Route::get('refund-policy', [PageController::class, 'refundPolicy'])->name('refund-policy');
 Route::get('terms', [PageController::class, 'terms'])->name('terms');
 Route::get('privacy', [PageController::class, 'privacy'])->name('privacy');

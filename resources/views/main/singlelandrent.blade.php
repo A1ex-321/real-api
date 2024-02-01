@@ -30,7 +30,7 @@
 
 
 <!-- Breadcrumb -->
-<div class="breadcrumb-area section" style="background-image: url({{ asset('public/images/bg/breadcrumb.jpg') }});">
+<div class="breadcrumb-area section" style="background-image: url({{ asset('public/images/images3.jpg') }}); height:255PX;">
 
     <div class="container">
         <div class="breadcrumb pt-75 pb-75 pt-sm-70 pb-sm-40 pt-xs-70 pb-xs-40">
@@ -49,240 +49,184 @@
     </div>
 </div>
 <!--// Breadcrumb -->
-    
+
 <!-- Page Conttent -->
-<main class="page-content section"> 
-   
-    <!-- Featured Properites Start -->   
+<main class="page-content section">
+
+    <!-- Featured Properites Start -->
     <div class="properites-sidebar-wrap pt-80 pt-md-60 pt-sm-40 pt-xs-30 pb-110 pb-md-90 pb-sm-70 pb-xs-60">
         <div class="container">
-            
+
             <div class="row">
                 <div class="col-lg-4 col-xl-3 col-12 order-lg-2 order-2">
                     <div class="row widgets">
-                       
-                        
+
+
                         <div class="col-lg-12">
                             <div class="single-widget widget">
                                 <h4 class="widget-title">
                                     <span>New Added Property</span>
                                 </h4>
+                                @foreach($All as $property)
                                 <div class="row single-propertiy-wigets">
                                     <div class="col-lg-12 col-md-6 single-propertiy mb-30">
-                                        <a href="#"><img src="{{ asset('public/images/propertes/w-propertie-01.jpg') }}" alt="">
-</a>
+                                        <a href="{{ url('/singlelandrent/' . $property->id) }}"><img src="{{ asset('public/images/' . $property->Image) }}" alt="">
+
+                                        </a>
                                         <div class="propertiy-det-box">
-                                            <h4><a href="#">Rent</a></h4>
-                                            <p>Price $1,09,000</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-6 single-propertiy mb-30">
-                                        <a href="#"><img src="{{ asset('public/images/propertes/w-propertie-01.jpg') }}" alt="">
-</a>
-                                        <div class="propertiy-det-box">
-                                            <h4><a href="#">Rent</a></h4>
-                                            <p>Price $1,03,000</p>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-6 single-propertiy mb-30">
-                                        <a href="#"><img src="{{ asset('public/images/propertes/w-propertie-01.jpg') }}" alt="">
-</a>
-                                        <div class="propertiy-det-box">
-                                            <h4><a href="#">Rent</a></h4>
-                                            <p>Price $1,08,000</p>
+                                            <h4><a href="{{ url('/singlelandrent/' . $property->id) }}">Property Rent</a></h4>
+                                            <h5>
+                                                {{ $property->address }}
+                                            </h5>
+                                            <p>Price : {{$property->price}}</p>
+                                            
                                         </div>
                                     </div>
                                 </div>
+                                @endforeach
                             </div>
                         </div>
-                        
-                        
-                        
+
+
+
                     </div>
                 </div>
+                @foreach ($getRecord as $property)
+
                 <div class="col-lg-8 col-xl-9 col-12 order-lg-1 order-1">
-                   
+
                     <div class="row">
                         <div class="col-lg-12">
                             <div class="blog-details-warpper">
                                 <div class="details-image mt-30">
-                                <img src="{{ asset('public/images/propertes/property_details.jpg') }}" alt="">
+                                    <img style="width:100%;height:400px;" src="{{ asset('public/images/' . $property->Image) }}" alt="">
 
                                 </div>
                                 <div class="details-contents-wrap">
-                                   
-                                    <h3>Mariyasa de Casel(RENT)</h3>
 
-                                    <p class="mt-10">Ortiz is one of the most popular real estate company all around USA. You can find your dream property or build property with us. We always provide importance to our customer that what they want or what they like ipsam </p>
-                                    
-                                    <h4>Description</h4>
-                                    
-                                    <p>Ortiz is one of the most popular real estate company all around USA. You can find your dream property or build property with us. We always provide importance to our customer that what they want or what they like ipsam ursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can procure him some great pleasure</p>
-                                    
-                                    <p>Ortiz is one of the most popular real estate company all around USA. You can find your dream property or build property with us. We always provide importance to our customer that what they want or what they like ipsam ursue pleasure rationally encounter consequences that are extremely painful. Nor again is there anyone </p>
-                                    
-                                    
-                                    
+                                    <h2>{{ $property->Tittle }} (RENT)</h2>
+
+                                    <h3>Description</h3>
+                                    <p>{{ $property->Description }} </p>
+
+
+
                                     <div class="propertice-details pt-25">
                                         <div class="row">
-                                           
+
                                             <div class="col-12">
                                                 <div class="properties-details-title mb-10">
                                                     <h4>Condition</h4>
                                                 </div>
                                             </div>
-                                            
+
+
+                                            @if (!empty($property->condition))
+                                            @php
+                                            $conditionsArray = explode(',,', $property->condition);
+                                            @endphp
+
+                                            @foreach ($conditionsArray as $condition)
+                                            @php
+                                            list($strong, $span) = explode(':', $condition, 2);
+                                            @endphp
                                             <div class="col-md-4 col-sm-6">
                                                 <div class="single-info">
-                                                    <strong>Areas:</strong><span> 1200 Sqrt</span>
+                                                    <strong>{{ $strong }}:</strong><span> {{ $span }}</span>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4 col-6">
-                                                <div class="single-info">
-                                                    <strong>Bedroom:</strong><span> 5 Bedroom</span>
+                                            @endforeach
+                                            @endif
+
+
+
+
+
+                                            <div class="propertice-details pt-25" style="margin-left:17px;">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="properties-details-title mb-10">
+                                                            <h4>Address and Price</h4>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <div class="single-info">
+                                                            <strong>Address:</strong><span> {{ $property->address }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6 col-sm-6">
+                                                        <div class="single-property-price">
+                                                            <strong>Price: {{ $property->price }}</strong>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4 col-sm-6">
-                                                <div class="single-info">
-                                                    <strong>Bathroom:</strong><span> 3 Bathroom</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-6">
-                                                <div class="single-info">
-                                                    <strong>Kitchen: </strong><span> 2</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-6">
-                                                <div class="single-info">
-                                                    <strong>Leaving room:</strong><span> 3</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-6">
-                                                <div class="single-info">
-                                                    <strong>Garage:</strong><span> 3</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-8 col-sm-6">
-                                                <div class="single-info">
-                                                    <strong>Address:</strong><span>   22 Aveniew Tower (5th floor) First Street, Chicago, USA</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-6">
-                                                <div class="single-property-price">
-                                                    <strong>Price:  $1,53,000</strong>
-                                                </div>
-                                            </div>
+
                                         </div>
                                     </div>
                                     <div class="propertice-details pt-25">
                                         <div class="row">
-                                           
+
                                             <div class="col-12">
                                                 <div class="properties-details-title mb-10">
                                                     <h4>Amenities</h4>
                                                 </div>
                                             </div>
-                                            
+                                            @if (!empty($property->amenities))
+                                            @php
+                                            $amenitiesArray = explode(',,', $property->amenities);
+                                            @endphp
+
+                                            @foreach ($amenitiesArray as $amenity)
+
                                             <div class="col-md-4 col-sm-6">
                                                 <div class="single-info">
-                                                    <span>Air Conditioning</span>
+                                                    <span>{{ $amenity }}</span>
                                                 </div>
                                             </div>
-                                            <div class="col-md-4 col-6">
-                                                <div class="single-info">
-                                                    <span>Bedding</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-6">
-                                                <div class="single-info">
-                                                    <span>Balcony</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-6">
-                                                <div class="single-info">
-                                                    <span>Cable TV</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-6">
-                                                <div class="single-info">
-                                                    <span>Internet</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-6">
-                                                <div class="single-info">
-                                                    <span>Parking</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-6">
-                                                <div class="single-info">
-                                                    <span>lift</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-6">
-                                                <div class="single-info">
-                                                    <span>Home Theater</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-6">
-                                                <div class="single-info">
-                                                    <span>Pool</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-6">
-                                                <div class="single-info">
-                                                    <span>Dishwasher</span>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-4 col-sm-6">
-                                                <div class="single-info">
-                                                    <span>Toaster</span>
-                                                </div>
-                                            </div>
+                                            @endforeach
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="propertice-details pt-25">
-                                    <div class="row">
-    <div class="col-md-6">
-        <div class="row">
-            <div class="col-12">
-                <div class="properties-details-title mb-20">
-                    <h4>Multi Images</h4>
-                </div>
-            </div>
-            <div class="col-lg-4"> <!-- Each image takes one-third of the column -->
-                <div class="image">
-                    <img src="{{ asset('public/images/propertes/property-map.jpg') }}" alt="">
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="image">
-                    <img src="{{ asset('public/images/propertes/property-map.jpg') }}" alt="">
-                </div>
-            </div>
-            <div class="col-lg-4">
-                <div class="image">
-                    <img src="{{ asset('public/images/propertes/property-map.jpg') }}" alt="">
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <div class="properties-details-title mb-20">
+                                                            <h4>Multiple Photos</h4>
+                                                        </div>
+                                                    </div>
+                                                    @if (!empty($property->multiimage))
+                                                    @foreach (explode(',', $property->multiimage) as $image)
+                                                    <div class="col-lg-6"> <!-- Each image takes one-third of the column -->
+
+                                                        <div class="image">
+                                                            <img style="padding-bottom:15px;width:100%;height:200px;object-fit:cover;" src="{{ asset('public/images/' . $image) }}">
+                                                        </div>
+                                                    </div>
+                                                    @endforeach
+                                                    @endif
+                                                </div>
+                                            </div>
+                                        </div>
 
                                     </div>
-                                    
+
                                 </div>
-                                
-                                
-                                
+
+
+
                             </div>
                         </div>
                     </div>
-                   
+
                 </div>
+                @endforeach
             </div>
-            
+
         </div>
-    </div><!-- Featured Properites End -->  
+    </div><!-- Featured Properites End -->
 
 </main>
 <!--// Page Conttent -->

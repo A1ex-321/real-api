@@ -26,6 +26,56 @@
     .image-container {
         margin-right: 10px;
     }
+
+    #tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px;
+        border: 1px solid #ccc;
+    }
+    #add-tag-button 
+    {
+        background-color: green;
+
+    }    
+    .tag {
+        background-color: #f0f0f0;
+        padding: 5px;
+        margin: 5px;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .remove-button {
+        color: red;
+        cursor: pointer;
+        margin-left: 5px;
+    }
+
+    #tags-container1,
+    #tags-container2 {
+        display: inline-block;
+        vertical-align: top;
+        /* Adjust as needed */
+    }
+
+    .horizontal-tags {
+        display: flex;
+        flex-wrap: wrap;
+        /* Wrap to the next line when width reaches 100% */
+    }
+
+    .combined-tag {
+        display: inline-block;
+        margin-right: 10px;
+        /* Adjust the spacing as needed */
+        margin-bottom: 5px;
+    }
+
+    .remove-button {
+        margin-left: 5px;
+        /* Adjust the spacing as needed */
+    }
 </style>
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -39,34 +89,83 @@
                 <div class="col-md-12">
                     <div class="card card-info">
                         <div class="card-header">
-                            <h3 class="card-title">Add New Work <small></small></h3>
+                            <h3 class="card-title">Add<small></small></h3>
                         </div>
-                        <form action="{{ route('create-blog') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('create-sale') }}" method="post" id="tags-form" enctype="multipart/form-data">
                             {{csrf_field()}}
 
 
                             <div class="card-body">
                                 <div class="form-group">
-                                    <label for="exampleInputEmail1">Title<span style="color:red">*</span></label>
-                                    <input type="text" name="Tittle" class="form-control" id="exampleInputEmail1" placeholder="Title" value="" required>
+                                    <label for="exampleInputEmail1">Type<span style="color:red">*</span></label>
+                                    <select name="type" class="form-control" id="exampleInputEmail1" required>
+                                        <option value="">Select Type</option>
+                                        <option value="1">Property Sale</option>
+                                        <option value="2">Property Rent</option>
+                                        <option value="3">Land Sale</option>
+                                        <option value="4">Land Rent</option>
+                                    </select>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Property Title<span style="color:red">*</span></label>
+                                    <input type="text" name="Tittle" class="form-control" id="exampleInputEmail1" placeholder="Title" value="" required >
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Description<span style="color:red"></span></label>
-                                   <textarea name="Description" class="form-control" id="exampleInputEmail1" placeholder="Description" style="width: 100%; height: 100px;"></textarea>
+                                    <textarea name="Description" class="form-control" id="exampleInputEmail1" placeholder="Description" style="width: 100%; height: 100px;"></textarea>
 
 
                                 </div>
                                 <div class="form-group">
+                                    <label for="exampleInputEmail1">Address<span style="color:red"></span></label>
+                                    <textarea name="address" class="form-control" id="exampleInputEmail1" placeholder="Address" style="width: 100%; height: 100px;"></textarea>
+                                </div>
+                                <div class="form-group">
                                     <label for="exampleInputEmail1">Thumb Image<span style="color:red">*</span></label>
-                                    <input type="file" name="Image" class="form-control" id="exampleInputEmail1" placeholder="Image" value="" required>
+                                    <input type="file" name="Image" class="form-control" id="exampleInputEmail1" placeholder="Image" value=""required >
                                 </div>
                                 <input type="hidden" id="imageIds" name="multiimage" value="">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Price<span style="color:red">*</span></label>
+                                    <input type="text" name="price" class="form-control" id="exampleInputEmail1" placeholder="Price" value=""required >
+                                </div>
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Amenities<span style="color:red"></span></label>
+                                    <div id="tags-container">
+                                        <input type="text" id="tag-input" placeholder="Amenities" name="amenities">
+                                        <button type="button" id="add-tag-button">+</button>
+                                        
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1">Condition<span style="color:red"></span></label>
+                                    <label for="exampleInputEmail1">Title<span style="color:red"></span></label>
+                                    <div id="tags-container1">
+                                        <input type="text" id="tag-input1" placeholder="first" name="">
+                                    </div>
+                                    <label for="exampleInputEmail1">Value<span style="color:red"></span></label>
+                                    <div id="tags-container2">
+                                        <input type="text" id="tag-input2" placeholder="second" name="">
+                                    </div>
+                                    <button type="button" style="background-color:green;" class="add-tag-button">Add Tag +</button>
+                                </div>
+
+
+
+
+                                <div id="combined-tags" class="horizontal-tags"></div>
+
+
 
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Multiple Image<span style="color:red">*</span></label>
                                     <input type="file" id="imageInput" name="" class="form-control" value="" multiple required>
                                 </div>
-
+                                <input type="hidden" id="condition" name="condition" value="">
 
                                 <!-- <div class="form-group">
                                     <label for="exampleInputEmail1">multiple Image<span style="color:red">*</span></label>
@@ -93,6 +192,153 @@
 @push('scripts')
 <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
 <meta name="csrf-token" content="{{ csrf_token() }}">
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const tagsContainer = document.getElementById('tags-container');
+        const tagInput = document.getElementById('tag-input');
+        const addButton = document.getElementById('add-tag-button');
+        const tagsForm = document.getElementById('tags-form');
+
+
+        addButton.addEventListener('click', function () {
+            const tagText = tagInput.value;
+            if (tagText !== '') {
+                addTag(tagText);
+                tagInput.value = '';
+            }
+        });
+        tagsForm.addEventListener('submit', function(event) {
+            const tagValues = Array.from(tagsContainer.getElementsByClassName('tag'))
+                .map(tag => tag.textContent.replace(/(✕|✏️)/g, ''))
+                .join(',,');
+
+            console.log('Tag Values:', tagValues); // Add this line for debugging
+
+            document.getElementsByName('amenities')[0].value = tagValues;
+        });
+
+
+        function addTag(tagText) {
+            const tagElement = document.createElement('div');
+            tagElement.classList.add('tag');
+
+            const tagContent = document.createElement('span');
+            tagContent.textContent = tagText;
+            tagElement.appendChild(tagContent);
+
+            const editButton = document.createElement('button');
+            editButton.classList.add('edit-button');
+            editButton.textContent = '✏️';
+            editButton.addEventListener('click', function (e) {
+                e.preventDefault();
+                const updatedText = prompt('Edit the tag:', tagText);
+                if (updatedText !== null) {
+                    tagContent.textContent = updatedText;
+                }
+            });
+            tagElement.appendChild(editButton);
+
+            const removeButton = document.createElement('button');
+            removeButton.classList.add('remove-button');
+            removeButton.textContent = '✕'; // Unicode character for multiplication symbol
+            removeButton.addEventListener('click', function () {
+                tagsContainer.removeChild(tagElement);
+            });
+            tagElement.appendChild(removeButton);
+
+            tagsContainer.appendChild(tagElement);
+        }
+    });
+</script>
+
+
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const addTagButton = document.querySelector('.add-tag-button');
+        const combinedTagsContainer = document.getElementById('combined-tags');
+        const hiddenInput = document.getElementById('condition');
+        const tagsForm = document.getElementById('tags-form');
+
+        addTagButton.addEventListener('click', function () {
+            const tagInput1 = document.getElementById('tag-input1');
+            const tagInput2 = document.getElementById('tag-input2');
+
+            const tagText1 = tagInput1.value;
+            const tagText2 = tagInput2.value;
+
+            if (tagText1 !== '' && tagText2 !== '') {
+                const combinedText = `${tagText1}:${tagText2}`;
+                displayCombinedTags(combinedText);
+
+                tagInput1.value = '';
+                tagInput2.value = '';
+            }
+        });
+
+        tagsForm.addEventListener('submit', function (event) {
+
+            const tagValues = Array.from(combinedTagsContainer.getElementsByClassName('combined-tag'))
+                .map(tagElement => tagElement.textContent.replace(/(✕|✏️)/g, ''))
+                .join(',,');
+
+            hiddenInput.value = tagValues;
+
+            // Optionally, you can add custom logic for form submission here
+            // For example, submitting the form using AJAX
+        });
+
+        function displayCombinedTags(combinedText) {
+            const combinedTagsElement = document.createElement('div');
+            combinedTagsElement.classList.add('combined-tag');
+
+            const tagContent = document.createElement('span');
+            tagContent.textContent = combinedText;
+            combinedTagsElement.appendChild(tagContent);
+
+            const editButton = document.createElement('button');
+            editButton.classList.add('edit-button');
+            editButton.textContent = '✏️';
+            editButton.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent the form submission
+                const updatedText = prompt('Edit the tag:', tagContent.textContent);
+                if (updatedText !== null) {
+                    tagContent.textContent = updatedText;
+                    updateHiddenInput();
+                }
+            });
+            combinedTagsElement.appendChild(editButton);
+
+            const removeButton = document.createElement('button');
+            removeButton.classList.add('remove-button');
+            removeButton.textContent = '✕';
+            removeButton.addEventListener('click', function () {
+                combinedTagsContainer.removeChild(combinedTagsElement);
+                updateHiddenInput();
+            });
+            combinedTagsElement.appendChild(removeButton);
+
+            combinedTagsContainer.appendChild(combinedTagsElement);
+
+            updateHiddenInput();
+        }
+
+        function updateHiddenInput() {
+            const combinedTags = Array.from(combinedTagsContainer.getElementsByClassName('combined-tag'))
+                .map(tagElement => tagElement.textContent.replace('✕', ''))
+                .join(',,');
+
+            hiddenInput.value = combinedTags;
+        }
+    });
+</script>
+
+
+
+
+
+
+
 
 <script>
     $(document).ready(function() {
