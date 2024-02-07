@@ -13,11 +13,13 @@
         max-width: 100%;
         word-wrap: break-word;
     }
+
     td {
-        max-height: 10px; /* Adjust the max-height as needed */
-        overflow-y: auto; /* Add a vertical scrollbar if needed */
+        max-height: 10px;
+        /* Adjust the max-height as needed */
+        overflow-y: auto;
+        /* Add a vertical scrollbar if needed */
     }
-   
 </style>
 
 
@@ -110,23 +112,36 @@
                                                 </a>
                                             </button>
                                         </td> -->
-                                        <td>{{$value->address}}</td>
-                                        <td>{{$value->price}}</td>
-                                        <td>
-    @if (!empty($value->amenities))
-        @foreach (explode(',,', $value->amenities) as $amenity)
-            <div>{{ Str::limit($amenity, 200) }}</div>
-        @endforeach
-    @endif
-</td>
+                                        <!-- Define the function -->
 
-<td>
-    @if (!empty($value->condition))
-        @foreach (explode(',,', $value->condition) as $conditionPart)
-            <div class="limited-text">{{ $conditionPart }}</div>
-        @endforeach
-    @endif
-</td>
+
+ 
+<!-- Usage -->
+<td>₹{{ $value->address }}</td>
+
+<td>₹{{ $value->price }}</td>
+
+
+
+
+
+
+
+                                        <td>
+                                            @if (!empty($value->amenities))
+                                            @foreach (explode(',,', $value->amenities) as $amenity)
+                                            <div>{{ Str::limit($amenity, 200) }}</div>
+                                            @endforeach
+                                            @endif
+                                        </td>
+
+                                        <td>
+                                            @if (!empty($value->condition))
+                                            @foreach (explode(',,', $value->condition) as $conditionPart)
+                                            <div class="limited-text">{{ $conditionPart }}</div>
+                                            @endforeach
+                                            @endif
+                                        </td>
 
 
                                         <td>

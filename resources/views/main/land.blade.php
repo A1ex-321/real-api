@@ -47,7 +47,7 @@
 <div class="hero-section section">
 
     <div class="hero-slider hero-slider-one">
-        <div class="hero-slide-item" style="background-image: url({{ asset('public/images/g2.png') }}); height: 500px;">
+        <div class="hero-slide-item" style="background-image: url({{ asset('public/images/21.jpg') }}); height: 500px;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-9 ml-auto mr-auto">
@@ -57,19 +57,7 @@
                 </div>
             </div>
         </div>
-        <div class="hero-slide-item" style="background-image: url({{ asset('public/images/b6.jpeg') }}); height: 500px;">
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-md-9 ml-auto mr-auto">
-
-
-
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="hero-slide-item" style="background-image: url({{ asset('public/images/g4.png') }}); height: 500px;">
+        <div class="hero-slide-item" style="background-image: url({{ asset('public/images/22.jpg') }}); height: 500px;">
 
             <div class="container">
                 <div class="row">
@@ -81,7 +69,19 @@
                 </div>
             </div>
         </div>
-        <div class="hero-slide-item" style="background-image: url({{ asset('public/images/b3.jpg') }}); height: 500px;">
+        <div class="hero-slide-item" style="background-image: url({{ asset('public/images/23.jpg') }}); height: 500px;">
+
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-9 ml-auto mr-auto">
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-slide-item" style="background-image: url({{ asset('public/images/12.jpg') }}); height: 500px;">
 
             <div class="container">
                 <div class="row">
@@ -120,16 +120,24 @@
                         <!-- single-property Start -->
                         <div class="single-property mt-30">
                             <div class="property-img">
-                                <a href="">
-                                    <img src="{{ asset('public/images/' . $property->Image) }}" alt="">
+                            @if($property->type == 3)
+                            <a href="{{ url('/singlelandsale/' . $property->id) }}">
+                                    <img src="{{ asset('public/images/' . $property->Image) }}" alt="" style="height:200px;">
 
                                 </a>
+                                @elseif($property->type == 4)
+                                <a href="{{ url('/singlelandrent/' . $property->id) }}">
+                                    <img src="{{ asset('public/images/' . $property->Image) }}" alt="" style="height:200px;">
+
+                                </a>
+                                @endif
+                              
                             </div>
                             <div class="property-desc">
                                 @if($property->type == 3)
-                                <h4><a href="{{ url('/singlelandsale/' . $property->id) }}">Land For Sale</a></h4>
+                                <h4><a href="{{ url('/singlelandsale/' . $property->id) }}">Land For Sale (₹{{$property->price}})</a></h4>
                                 @elseif($property->type == 4)
-                                <h4><a href="{{ url('/singlelandrent/' . $property->id) }}">Land For Rent</a></h4>
+                                <h4><a href="{{ url('/singlelandrent/' . $property->id) }}">Land For Rent (₹{{$property->price}})</a></h4>
                                 @endif
                                 <p>
                                     <span class="location">{{ $property->address }}</span>

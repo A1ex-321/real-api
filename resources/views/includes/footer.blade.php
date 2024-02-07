@@ -17,7 +17,7 @@
 
                             <form id="mc-form" class="mc-form footer-newsletter">
                                 <div class="header-buttons" style="margin-right: 100px;">
-                                    <a class="header-btn btn" href="contact-us.html" >Contact Us</a>
+                                    <a class="header-btn btn" href="{{ url('/contact') }}" >Contact Us</a>
             
                                 </div>
                             </form>
@@ -74,10 +74,10 @@
                     </div>
                     <div class="footer-info">
                         <ul class="footer-list">
-                            <li><a href="index.html">Home</a></li>
-                            <li><a href="properties-left-sidebar.html">location</a></li>
-                            <li><a href="about-us.html">About Us</a></li>
-                            <li><a href="contact-us.html">Contact</a></li>
+                            <li><a href="{{ url('/') }}">Home</a></li>
+                            <li><a href="{{ url('/contact') }}">location</a></li>
+                            <li><a href="{{ url('/about') }}">About Us</a></li>
+                            <li><a href="{{ url('/contact') }}">Contact</a></li>
 
                         </ul>
                     </div>
@@ -101,8 +101,8 @@
                                 <div class="contact-text">
                                     <i class="glyph-icon flaticon-call"></i>
                                     <p>
-                                        <span>Call Us : <a href="tel:1234566789">+91 9840656503</a></span>
-                                        <span>Call Us : <a href="tel:1234566789"> +91 8148277828</a></span>
+                                        <span>Call Us : <a href="tel:1234566789">+91 8148277828</a></span>
+                                        <span>Call Us : <a href="tel:1234566789">+91 8148277828</a></span>
                                     </p>
 
                                 </div>
@@ -136,6 +136,7 @@
     </div>
 </div>
 
+
 </footer>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">    <!-- Map js code here -->
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC3nDHy1dARR-Pa_2jjPCjvsOR4bcILYsM"></script>
@@ -150,5 +151,66 @@
 
 
 </body>
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- Include jQuery first -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Then include your other scripts -->
+<script>
+    $(document).ready(function() {
+        // Check if logo image URL is in local storage
+        var storedLogoImage = localStorage.getItem('logoImage');
+
+        if (storedLogoImage) {
+            // Use the stored image URL
+            $('#logo-img').attr('src', storedLogoImage);
+        }
+
+        // Function to fetch and update the logo image URL
+        function fetchAndUpdateLogo() {
+            $.ajax({
+                url: '/header', // Your route URL
+                type: 'GET',
+                success: function(response) {
+                    if (response.image) {
+                        // Update the logo on the page
+                        $('#logo-img').attr('src', response.image);
+
+                        // Store the updated image URL in local storage
+                        localStorage.setItem('logoImage', response.image);
+                    } else {
+                        console.error('No image found');
+                    }
+                },
+                error: function(error) {
+                    console.error('Error fetching logo:', error.responseText);
+                }
+            });
+        }
+
+        // Fetch and update the logo every 1 hour (you can adjust this interval)
+        setInterval(fetchAndUpdateLogo, 3600000); // 1 hour in milliseconds
+    });
+</script>
+<!-- Add this script at the end of your HTML body -->
+
+<script>
+    $(document).ready(function() {
+        // Display the preloader
+        $('#preloader').show();
+
+        // Wait for the page to fully load
+        $(window).on('load', function() {
+            // Hide the preloader
+            $('#preloader').fadeOut('slow');
+        });
+    });
+</script>
+
+
+
+
+
+
 
 </html>

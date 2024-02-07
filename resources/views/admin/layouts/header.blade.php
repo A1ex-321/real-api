@@ -32,6 +32,15 @@
 .sidebar::-webkit-scrollbar-track {
     background-color: #f1f1f1;
 }
+.expand-image {
+    margin-top: -9px;
+    height: 200px;
+    transition: transform 0.3s ease-in-out; /* Add a smooth transition effect */
+}
+
+.expand-image:hover {
+    transform: scale(1.2); /* Increase the size of the image on hover */
+}
 
 </style>
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">

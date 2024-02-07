@@ -78,7 +78,7 @@
                                             <h5>
                                                 {{ $property->address }}
                                             </h5>
-                                            <p>Price : {{$property->price}}</p>
+                                            <p>Price : ₹{{$property->price}}</p>
                                             
                                         </div>
                                     </div>
@@ -156,7 +156,7 @@
                                                     </div>
                                                     <div class="col-md-6 col-sm-6">
                                                         <div class="single-property-price">
-                                                            <strong>Price: {{ $property->price }}</strong>
+                                                            <strong>Price: ₹{{ $property->price }}</strong>
                                                         </div>
                                                     </div>
                                                 </div>

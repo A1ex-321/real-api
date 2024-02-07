@@ -18,9 +18,21 @@
     <!-- Main Style CSS -->
     <link rel="stylesheet" href="{{ asset('public/css/style.css') }}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" crossorigin="anonymous" />
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<!-- Include jQuery first -->
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Then include your other scripts -->
+<script src="path/to/your/custom/script.js"></script>
+
 </head>
 
 <body>
+<!-- Preloader -->
+<div id="preloader">
+    <div id="loader"></div>
+</div>
+
 
 
 

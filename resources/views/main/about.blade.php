@@ -57,7 +57,11 @@
           
           
 
-         
+@if(Session::has('success'))
+    <div class="alert alert-success">
+        {{ Session::get('success') }}
+    </div>
+@endif
 <div class="our-agents-section section pt-110 pt-md-90 pt-sm-70 pt-xs-60 pb-110 pb-md-90 pb-sm-70 pb-xs-60">
     <div class="container">
         
@@ -88,36 +92,17 @@
                                     <div class="row">
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                                             <!-- counter start -->
-                                            <div class="counter-2">
-                                                <div class="count-inner d-flex align-items-center">
-                                                    <i class="fa fa-home"></i>
-                                                    <h3 class="counter-active-2"> 131</h3>
-                                                </div>
-                                                <p>AWARD WIN</p>
-                                            </div>
+                                         
                                             <!-- counter end -->
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                                             <!-- counter start -->
-                                            <div class="counter-2 ">
-                                                <div class="count-inner d-flex align-items-center">
-                                                   <i class="fa fa-key"></i>
-                                                    <h3 class="counter-active-2">231</h3>
-                                                </div>
-                                                <p>Happy Clients</p>
-                                            </div>
+                                          
                                             <!-- counter end -->
                                         </div>
                                         <div class="col-lg-4 col-md-4 col-sm-4 col-12">
                                             <!-- counter start --> 
-                                            <div class="counter-2">
-                                                <div class="count-inner d-flex align-items-center">
-                                                   <i class="fa fa-smile-o"></i>
-                                                   <h3 class="counter-active-2">612</h3>
-                                                </div>
-                                                
-                                                <p>PROJECT DONE</p>
-                                            </div>
+                                        
                                             <!-- counter end -->
                                         </div>
                                     </div>
@@ -236,13 +221,15 @@
                     </div>
                     
                     <div class="comment-form">
-                        <form action="#">
+                    <form action="{{ route('message') }}" method="post" enctype="multipart/form-data" id="tags-form">
+
+                            {{csrf_field()}}
                             <div class="row">
-                                <div class="col-md-6 col-12 mb-30"><input type="text" placeholder="Your Name"></div>
-                                <div class="col-md-6 col-12 mb-30"><input type="email" placeholder="Email"></div>
-                                <div class="col-md-6 col-12 mb-30"><input type="text" placeholder="Phone"></div>
-                                <div class="col-md-6 col-12 mb-30"><input type="text" placeholder="Subject"></div>
-                                <div class="col-12 mb-30"><textarea placeholder="Message"></textarea></div>
+                                <div class="col-md-6 col-12 mb-30"><input type="text" name="name"placeholder="Your Name" required></div>
+                                
+                                <div class="col-md-6 col-12 mb-30"><input type="text" placeholder="Phone" name="msg" required></div>
+                            
+                                <div class="col-12 mb-30"><textarea placeholder="Message" name="phone" required> </textarea></div>
                                 <div class="col-12"><button class="btn send-btn btn-circle">Send</button></div>
                             </div>
                         </form>

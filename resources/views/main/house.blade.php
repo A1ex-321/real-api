@@ -47,7 +47,7 @@
 <div class="hero-section section">
 
     <div class="hero-slider hero-slider-one">
-    <div class="hero-slide-item" style="background-image: url({{ asset('public/images/g2.png') }}); height: 500px;">
+    <div class="hero-slide-item" style="background-image: url({{ asset('public/images/11.jpg') }}); height: 500px; object-fit:cover;">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8 col-md-9 ml-auto mr-auto">
@@ -57,7 +57,7 @@
                 </div>
             </div>
         </div>
-        <div class="hero-slide-item" style="background-image: url({{ asset('public/images/b6.jpeg') }}); height: 500px;">
+        <div class="hero-slide-item" style="background-image: url({{ asset('public/images/12.jpg') }}); height: 500px; object-fit:cover;">
 
             <div class="container">
                 <div class="row">
@@ -69,7 +69,7 @@
                 </div>
             </div>
         </div>
-        <div class="hero-slide-item" style="background-image: url({{ asset('public/images/g4.png') }}); height: 500px;">
+        <div class="hero-slide-item" style="background-image: url({{ asset('public/images/13.jpg') }}); height: 500px; object-fit:cover;">
 
             <div class="container">
                 <div class="row">
@@ -81,7 +81,7 @@
                 </div>
             </div>
         </div>
-        <div class="hero-slide-item" style="background-image: url({{ asset('public/images/b3.jpg') }}); height: 500px;">
+        <div class="hero-slide-item" style="background-image: url({{ asset('public/images/14.jpg') }}); height: 500px; object-fit:cover;">
 
             <div class="container">
                 <div class="row">
@@ -113,96 +113,41 @@
         <!-- tab-contnt start -->
         <div class="tab-content">
             <div class="tab-pane active" id="tab_item_01">
-                
+
                 <div class="row ">
-
+                    @foreach ($getRecord as $property)
                     <div class="col-lg-4 col-md-6 col-12">
                         <!-- single-property Start -->
                         <div class="single-property mt-30">
                             <div class="property-img">
-                                <a href="{{url('/singleland')}}">
-                                <img src="{{ asset('public/images/c1.jpg') }}" alt="">
+                            @if($property->type == 1)
+                            <a href="{{ url('/singlehousesale/' . $property->id) }}">
+                                    <img src="{{ asset('public/images/' . $property->Image) }}" alt="" style="height:200px;">
+
                                 </a>
-                                <!-- <span class="level-stryker">FOR RENT</span> -->
+                                @elseif($property->type == 2)
+                                <a href="{{ url('/singlehouserent/' . $property->id) }}">
+                                    <img src="{{ asset('public/images/' . $property->Image) }}" alt=""style="height:200px;">
+
+                                </a>
+                                @endif
                             </div>
                             <div class="property-desc">
-                                <h4><a href="{{url('/singleland')}}">PLOT for rent</a></h4>
+                                @if($property->type == 1)
+                                <h4><a href="{{ url('/singlehousesale/' . $property->id) }}">House For Sale (₹{{$property->price}})</a></h4>
+                                @elseif($property->type == 2)
+                                <h4><a href="{{ url('/singlehouserent/' . $property->id) }}">House For Rent (₹{{$property->price}})</a></h4>
+                                @endif
                                 <p>
-                                    <span class="location">Address</span>
-                                   
+                                    <span class="location">{{ $property->address }}</span>
                                 </p>
-                               
                             </div>
                         </div><!-- single-property End -->
                     </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <!-- single-property Start -->
-                        <div class="single-property mt-30">
-                            <div class="property-img">
-                                <a href="properties-details.html">
-                                <img src="{{ asset('public/images/c2.jpg') }}" alt="">
-                                </a>
-                            </div>
-                            <div class="property-desc">
-                                <h4><a href="properties-details.html">PLOT for sale</a></h4>
-                                <p>
-                                    
-                                    <span class="property-info">Address </span>
-                                </p>
-                             
-                            </div>
-                        </div><!-- single-property End -->
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <!-- single-property Start -->
-                        <div class="single-property mt-30">
-                            <div class="property-img">
-                                <a href="properties-details.html">
-                                <img src="{{ asset('public/images/c3.jpg') }}" alt="">
-                                </a>
-                                <!-- <span class="level-stryker-2">FOR RENT</span> -->
-                            </div>
-                            <div class="property-desc">
-                                <h4><a href="properties-details.html">PLOT for rent</a></h4>
-                                <p>
-                                  
-                                    <span class="property-info">Address </span>
-                                </p>
-                               
-                            </div>
-                        </div><!-- single-property End -->
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 col-12">
-                        <!-- single-property Start -->
-                        <div class="single-property mt-30">
-                            <div class="property-img">
-                                <a href="properties-details.html">
-                                <img src="{{ asset('public/images/c3.jpg') }}" alt="">
-                                </a>
-                                <!-- <span class="level-stryker-2">FOR RENT</span> -->
-                            </div>
-                            <div class="property-desc">
-                                <h4><a href="properties-details.html">PLOT for sale</a></h4>
-                                <p>
-                                  
-                                    <span class="property-info">Address </span>
-                                </p>
-                               
-                            </div>
-                        </div><!-- single-property End -->
-                    </div>
-                
-                  
-                  
-
-                 
-
+                    @endforeach
                 </div>
             </div>
-    
+
         </div>
     </div>
 </div><!-- Featured Properites End -->  

@@ -196,6 +196,7 @@ Route::group(['middleware' => 'admin', 'web'], function () {
     Route::post('admin/sale/add', [BlogController::class, 'create_blog'])->name('create-sale');
     Route::get('admin/sale/edit/{id}', [BlogController::class, 'blog_edit']);
     Route::post('admin/sale/edit/{id}', [BlogController::class, 'blog_update'])->name('update-brand');
+    
 });
 
 
@@ -212,9 +213,9 @@ Route::get('admin/logout', [AuthController::class, 'logout_admin']);
 // Route::get('/product/{productId}', [PageController::class, 'productDetails'])->name('product-details');
 
 //terms and conditions
-Route::get('/', function () {
-    return view('main.index');
-});
+// Route::get('/', function () {
+//     return view('main.index');
+// });
 Route::get('/about', function () {
     return view('main.about');
 });
@@ -227,6 +228,14 @@ Route::get('/house', function () {
 Route::get('/land', [EstateController::class, 'land']);
 Route::get('/singlelandrent/{id}', [EstateController::class, 'singlelandrent']);
 Route::get('/singlelandsale/{id}', [EstateController::class, 'singlelandsale']);
+Route::get('/house', [EstateController::class, 'house']);
+Route::get('/singlehouserent/{id}', [EstateController::class, 'singlehouserent']);
+Route::get('/singlehousesale/{id}', [EstateController::class, 'singlehousesale']);
+Route::get('/', [EstateController::class, 'Alltype']);
+Route::post('/message', [EstateController::class, 'message'])->name('message');
+Route::get('/header', [EstateController::class, 'get_logo1']);
+
+
 
 // Route::get('/singleland', function () {
 //     return view('main.singleland');

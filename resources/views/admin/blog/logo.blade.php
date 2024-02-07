@@ -43,7 +43,7 @@
                                 <div class="card-body">
                                     <!-- Form inputs here -->
                                     <div class="form-group">
-                                        <label for="exampleInputEmail1">Logo(**Image size or dimension should be 213*62 **)<span style="color:red">*</span></label>
+                                        <label for="exampleInputEmail1">Logo<span style="color:red">*</span></label>
                                         <input type="file" name="image" class="form-control" id="exampleInputEmail1" placeholder="Logo" value="" required>
                                     </div>
                                 </div>
